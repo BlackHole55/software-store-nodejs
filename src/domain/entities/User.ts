@@ -5,8 +5,8 @@ export interface User {
     role: "user" | "admin";
     password_hash?: string; 
     library: ILibrary[];
-    createdAt: Date;
-    updatedAt: Date | null;
+    created_at: Date;
+    updated_at: Date | null;
 
 }
 

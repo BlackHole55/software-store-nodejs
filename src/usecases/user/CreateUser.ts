@@ -5,7 +5,7 @@ export class CreateUserUseCase {
     constructor(private userRepo: IUserRepository) {}
 
     async execute(user: User, userId: string): Promise<void> {
-        user.createdAt = new Date();
+        user.created_at = new Date();
 
         return await this.userRepo.create(user)
     }

@@ -34,13 +34,12 @@ const userSchema = new Schema<UserDocument>(
         playtime_hours: { type: Number, default: 0 }
       }
     ]},
-     {
-        timestamps: true
+    { 
+    timestamps: { 
+      createdAt: 'created_at', 
+      updatedAt: 'updated_at' 
     }
+  }
 );
-
-userSchema.add({
-  updatedAt: { type: Date, default: null }
-});
 
 export const UserModel = model<UserDocument>('User', userSchema,'users');

@@ -5,7 +5,7 @@ export class CreateGameUseCase {
     constructor(private gameRepo: IGameRepository) {}
 
     async execute(game: Game, userId: string): Promise<void> {
-        game.createdAt = new Date();
+        game.created_at = new Date();
 
         return await this.gameRepo.create(game, userId)
     }

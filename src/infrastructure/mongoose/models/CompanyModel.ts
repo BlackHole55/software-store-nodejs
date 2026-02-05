@@ -29,8 +29,10 @@ const companySchema = new Schema<CompanyDocument>(
     },
   },
   { 
-    timestamps: false, 
-    versionKey: false 
+    timestamps: { 
+      createdAt: 'created_at', 
+      updatedAt: 'updated_at' 
+    }
   }
 );
 
