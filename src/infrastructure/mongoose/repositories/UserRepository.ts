@@ -6,7 +6,14 @@ import type { IUserRepository } from "../../../domain/repositories/IUserReposito
 export class UserRepository implements IUserRepository {
 
     async getByEmail(email: string): Promise<User | null> {
-        return await UserModel.findOne({ email }).lean();
+        const user = await UserModel.findOne({ email }).lean()
+
+        if (!user) return null;
+
+        return {
+            ...user,
+            id: user._id.toString(),
+        };
     }
 
     async create(user: User): Promise<void> {
