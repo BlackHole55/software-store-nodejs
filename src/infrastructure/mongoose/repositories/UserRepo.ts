@@ -1,5 +1,5 @@
-import type { User } from "../../domain/entities/User.js";
-import type { IUserRepository } from "../../domain/repositories/IUserInterface.js";
+import type { User } from "../../../domain/entities/User.js";
+import type { IUserRepository } from "../../../domain/repositories/IUserInterface.js";
 
 
 export class UserRepo implements IUserRepository{
