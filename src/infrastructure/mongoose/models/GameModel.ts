@@ -5,26 +5,27 @@ export interface GameDocument extends Omit<Game, 'id'>, Document {}
 
 const GameSchema = new Schema<GameDocument>(
     {
-        publisherId: {
+        publisher_id: {
             // Use the 'as any' shortcut to align with the string interface
             type: Schema.Types.ObjectId as any,
             required: [true, 'Publisher ID is required'],
-            ref: 'Publisher'
+            ref: 'Publisher',
         },
-        developerId: { 
+        developer_id: { 
             type: Schema.Types.ObjectId as any, 
             required: [true, 'Developer ID is required'], 
-            ref: 'Developer' 
+            ref: 'Developer',
+            alias: 'developer_id'
         },
-        emulationId: { 
+        emulation_id: { 
             type: Schema.Types.ObjectId, 
             ref: 'Emulation' 
         },
-        userId: {
+        user_id: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
-        originalSystem: {
+        original_system: {
             type: String,
             maxLength: 250
         },
@@ -38,7 +39,7 @@ const GameSchema = new Schema<GameDocument>(
             type: String, 
             maxlength: 1000 
         },
-        releaseDate: { 
+        release_date: { 
             type: Date 
         },
         price: { 
@@ -46,7 +47,7 @@ const GameSchema = new Schema<GameDocument>(
             required: true, 
             min: 0 
         },
-        isVerified: {
+        is_verified: {
             type: Boolean,
             default: false
         },

@@ -1,16 +1,16 @@
 export interface Game {
     id?: string;
-    publisherId: string;
-    developerId: string;
-    emulationId?: string;
-    userId?: string;
-    originalSystem: string;
+    publisher_id: string;
+    developer_id: string;
+    emulation_id?: string;
+    user_id?: string;
+    original_system: string;
     title: string;
     description?: string;
-    releaseDate?: Date;
+    release_date?: Date;
     price: number;
-    isVerified: boolean;
+    is_verified: boolean;
     category?: string[];
-    createdAt: Date;
-    updatedAt: Date;
+    created_at: Date;
+    updated_At: Date;
 }
