@@ -1,7 +1,7 @@
 import type { IUserRepository } from "../../domain/repositories/IUserRepository.js";
 import type { User } from "../../domain/entities/User.js";
 
-export class CreateGameUseCase {
+export class CreateUserUseCase {
     constructor(private userRepo: IUserRepository) {}
 
     async execute(user: User, userId: string): Promise<void> {
