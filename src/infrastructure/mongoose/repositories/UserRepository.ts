@@ -21,10 +21,6 @@ export class UserRepository implements IUserRepository {
         return await UserModel.find({}).lean();
     }
 
-    async getAllVerified(): Promise<User[]> {
-        return await UserModel.find({ isVerified: true }).lean();
-    }
-
     async getById(id: string): Promise<User | null> {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
@@ -43,7 +39,7 @@ export class UserRepository implements IUserRepository {
             {
                 $set: {
                     ...updates,
-                    updatedAt: new Date()
+                    updated_at: new Date()
                 }
             },
             { runValidators: true }

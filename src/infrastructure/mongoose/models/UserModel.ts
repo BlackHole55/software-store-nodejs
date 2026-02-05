@@ -20,7 +20,6 @@ const userSchema = new Schema<UserDocument>(
     },
     password_hash: { 
       type: String, 
-      required: true 
     },
     role: { 
       type: String, 
