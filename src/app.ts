@@ -6,7 +6,7 @@ import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepos
 
 // Use Cases
 import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
-import { CreateUserUseCase } from "./usecases/user/RegisterUser.js";
+import { RegisterUserUseCase } from "./usecases/user/RegisterUser.js";
 
 // Controllers
 import { GameController } from "./web/controllers/GameController.js";
@@ -30,7 +30,7 @@ const userRepo = new UserRepository();
 
 // Initialize Use Cases
 const createGameUC = new CreateGameUseCase(gameRepo);
-const createUserUC = new CreateUserUseCase(userRepo);
+const createUserUC = new RegisterUserUseCase(userRepo);
 
 // Initialize Controllers
 const gameController = new GameController(createGameUC);
