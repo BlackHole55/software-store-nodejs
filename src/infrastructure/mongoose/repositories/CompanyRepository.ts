@@ -18,7 +18,7 @@ export class CompanyRepository implements ICompanyRepository{
         }
     
         async getAllVerified(): Promise<Company[]> {
-            return await CompanyModel.find({ isVerified: true }).lean();
+            return await CompanyModel.find({ is_verified: true }).lean();
         }
     
         async getById(id: string): Promise<Company | null> {
@@ -39,7 +39,7 @@ export class CompanyRepository implements ICompanyRepository{
                 {
                     $set: {
                         ...updates,
-                        updatedAt: new Date()
+                        updated_at: new Date()
                     }
                 },
                 { runValidators: true }
