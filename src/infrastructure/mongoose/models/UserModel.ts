@@ -33,13 +33,10 @@ const userSchema = new Schema<UserDocument>(
         added_at: { type: Date, default: Date.now },
         playtime_hours: { type: Number, default: 0 }
       }
-    ],
-    createdAt: { type: Date, default: Date.now }
-  },
-  { 
-    timestamps: false, 
-    versionKey: false 
-  }
+    ]},
+     {
+        timestamps: true
+    }
 );
 
 userSchema.add({

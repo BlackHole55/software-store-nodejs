@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import type { User } from "../../../domain/entities/User.js";
 import { UserModel } from "../models/UserModel.js";
-import type { IUserRepository } from "../../../domain/repositories/IUserInterface.js";
+import type { IUserRepository } from "../../../domain/repositories/IUserRepository.js";
 
 export class UserRepository implements IUserRepository {
 

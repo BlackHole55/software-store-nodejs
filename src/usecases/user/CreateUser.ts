@@ -1,4 +1,4 @@
-import type { IUserRepository } from "../../domain/repositories/IUserInterface.js";
+import type { IUserRepository } from "../../domain/repositories/IUserRepository.js";
 import type { User } from "../../domain/entities/User.js";
 
 export class CreateGameUseCase {
