@@ -1,17 +1,35 @@
 import express from "express";
-import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
- 
-dotenv.config();
+
+// Repositories
+import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepository.js";
+
+// Use Cases
+import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
+
+// Controllers
+import { GameController } from "./web/controllers/GameController.js";
+
+// Routes
+import { gameRouter } from "./web/routes/gameRoutes.js";
 
 const app = express();
-
-connectDB();
-
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
 });
+
+// Initialize Repositories
+const gameRepo = new GameRepository();
+
+// Initialize Use Cases
+const createGameUC = new CreateGameUseCase(gameRepo);
+
+// Initialize Controllers
+const gameController = new GameController(createGameUC);
+
+// Routes
+app.use('/api/v1/games', gameRouter(gameController));
+
+export default app;
