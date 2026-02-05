@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { CreateUserUseCase } from "../../usecases/user/CreateUser.js";
+import type { CreateUserUseCase } from "../../usecases/user/RegisterUser.js";
 
 export class UserController{
     constructor(

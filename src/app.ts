@@ -6,7 +6,7 @@ import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepos
 
 // Use Cases
 import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
-import { CreateUserUseCase } from "./usecases/user/CreateUser.js";
+import { CreateUserUseCase } from "./usecases/user/RegisterUser.js";
 
 // Controllers
 import { GameController } from "./web/controllers/GameController.js";
