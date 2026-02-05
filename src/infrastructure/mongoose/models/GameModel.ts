@@ -9,13 +9,12 @@ const GameSchema = new Schema<GameDocument>(
             // Use the 'as any' shortcut to align with the string interface
             type: Schema.Types.ObjectId as any,
             required: [true, 'Publisher ID is required'],
-            ref: 'Publisher',
+            ref: 'Publisher'
         },
         developer_id: { 
             type: Schema.Types.ObjectId as any, 
             required: [true, 'Developer ID is required'], 
-            ref: 'Developer',
-            alias: 'developer_id'
+            ref: 'Developer'
         },
         emulation_id: { 
             type: Schema.Types.ObjectId, 
