@@ -3,7 +3,7 @@ export interface User {
     username: string;
     email: string;
     role: "user" | "admin";
-    password_hash?: string; 
+    password?: string; 
     library: ILibrary[];
     created_at: Date;
     updated_at: Date | null;

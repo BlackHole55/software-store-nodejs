@@ -12,13 +12,13 @@ export class RegisterUserUseCase {
         }
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(user.password_hash!, salt)
+        const hashedPassword = await bcrypt.hash(user.password!, salt)
 
         user.created_at = new Date();
 
         return await this.userRepo.create({
             ...user,
-            password_hash: hashedPassword
+            password: hashedPassword
         });
     }
 }

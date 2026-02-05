@@ -18,7 +18,7 @@ const userSchema = new Schema<UserDocument>(
       unique: true, 
       lowercase: true 
     },
-    password_hash: { 
+    password: { 
       type: String, 
     },
     role: { 
