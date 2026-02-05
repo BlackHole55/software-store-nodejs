@@ -4,7 +4,8 @@ import type { UserController } from "../controllers/UserController.js";
 export const userRouter = (controller: UserController) => {
     const router = Router();
 
-    router.post('/', (req, res) => controller.handleCreate(req, res));
+    router.post('/register', (req, res) => controller.handleRegister(req, res));
+    router.post('/login', (req, res) => controller.handleLogin(req, res));
 
     return router;
 }
