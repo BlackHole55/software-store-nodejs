@@ -10,7 +10,7 @@ export interface IUserRepository {
   
   getById(id: string): Promise<User | null>;
   
-  update(id: string, updates: Partial<User>): Promise<User | null>;
+  update(id: string, updates: Partial<User>): Promise<void>;
   
-  delete(id: string): Promise<boolean>;
+  delete(id: string): Promise<void>;
 }

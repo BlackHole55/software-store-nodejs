@@ -2,7 +2,6 @@ import { Schema, model, Document } from 'mongoose';
 import type { User } from '../../../domain/entities/User.js';
 
 
-
 export interface UserDocument extends Omit<User, 'id'>, Document {}
 
 const userSchema = new Schema<UserDocument>(
