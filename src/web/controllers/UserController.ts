@@ -1,9 +1,9 @@
 import type { Request, Response } from 'express';
-import type { CreateUserUseCase } from "../../usecases/user/RegisterUser.js";
+import type { RegisterUserUseCase } from "../../usecases/user/RegisterUser.js";
 
 export class UserController{
     constructor(
-        private createUserUC: CreateUserUseCase
+        private createUserUC: RegisterUserUseCase
     ){}
 
      async handleCreate(req: Request, res: Response) {
@@ -12,7 +12,7 @@ export class UserController{
                 
             await this.createUserUC.execute(userData);
     
-            return res.status(201).json({ message: "User created successfuly" });
+            return res.status(201).json({ message: "User registered successfuly" });
         } catch (err: any) {
             return res.status(400).json({ error: err.message });
         }
