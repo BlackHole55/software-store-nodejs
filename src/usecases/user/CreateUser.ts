@@ -1,0 +1,12 @@
+import type { IUserRepository } from "../../domain/repositories/IUserInterface.js";
+import type { User } from "../../domain/entities/User.js";
+
+export class CreateGameUseCase {
+    constructor(private userRepo: IUserRepository) {}
+
+    async execute(user: User, userId: string): Promise<void> {
+        user.createdAt = new Date();
+
+        return await this.userRepo.create(user)
+    }
+}
