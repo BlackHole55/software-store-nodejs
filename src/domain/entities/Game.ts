@@ -7,7 +7,7 @@ export interface Game {
     originalSystem: string;
     title: string;
     description?: string;
-    realeseDate?: Date;
+    releaseDate?: Date;
     price: number;
     isVerified: boolean;
     category?: string[];
