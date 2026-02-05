@@ -11,7 +11,7 @@ export class GameController {
             const gameData = req.body;
             // TODO: implement authentification
             // const userId = req.headers
-            const userId = "placeholder";
+            const userId = (req as any).user.id;
 
             await this.createGameUC.execute(gameData, userId);
 
