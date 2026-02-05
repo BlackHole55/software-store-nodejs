@@ -10,11 +10,7 @@ export class UserRepository implements IUserRepository {
     }
 
     async create(user: User): Promise<void> {
-        const userData = {
-            ...user
-        }
-
-        await UserModel.create(userData);
+        await UserModel.create(user);
     }
 
     async getAll(): Promise<User[]> {
