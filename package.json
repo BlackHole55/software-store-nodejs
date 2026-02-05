@@ -1,0 +1,24 @@
+{
+  "name": "software-store-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlackHole55/software-store-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlackHole55/software-store-nodejs/issues"
+  },
+  "homepage": "https://github.com/BlackHole55/software-store-nodejs#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.1.6",
+    "nodemon": "^3.1.11"
+  }
+}
