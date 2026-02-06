@@ -1,27 +1,26 @@
-import { error } from "console";
-import { parse } from "path";
-
 export const validate = (schema) => async (req, res, next) => {
     try {
-        const parsed = await schema.parseAsync({
-            body: req.body,
-            params: req.params,
-            query: req.query,
-        });
+        const parsed = await schema.parseAsync(req.body);
 
-        req.body = parsed.body;
-        req.params = parsed.params;
-        req.query = parsed.query;
+        req.body = parsed;
 
         return next();
     } catch (err) {
-        return res.status(400).json({
+        if (err.errors && Array.isArray(err.errors)) {
+            return res.status(400).json({
+                status: "error",
+                message: "Validation failed",
+                errors: err.errors.map(e => ({
+                    field: e.path.join('.'),
+                    message: e.message
+                }))
+            });
+        }
+
+        return res.status(500).json({
             status: "error",
-            message: "Validation failed",
-            errors: err.errors.map(err => ({
-                field: err.path.join('.'),
-                message: err.message
-            }))
+            message: "Internal Server Error",
+            details: err.message
         });
     }
 }
