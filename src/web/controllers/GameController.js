@@ -1,6 +1,7 @@
 export class GameController {
     constructor({
         createGameUC, 
+        updateGameUC,
         getAllUC, 
         getAllVerifiedUC, 
         getByIdUC, 
@@ -8,6 +9,7 @@ export class GameController {
         getByUserIdUC
     }) {
         this.createGameUC = createGameUC;
+        this.updateGameUC = updateGameUC;
         this.getAllUC = getAllUC;
         this.getAllVerifiedUC = getAllVerifiedUC,
         this.getByIdUC = getByIdUC,
@@ -25,6 +27,21 @@ export class GameController {
             return res.status(201).json({ message: "Game created successfuly" });
         } catch (err) {
             return res.status(400).json({ error: err.message });
+        }
+    }
+
+    handleUpdate = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const gameData = req.body;
+            const userId = req.user.id;
+            const userRole = req.user.role;
+
+            await this.updateGameUC.execute(id, gameData, userId, userRole);
+
+            return res.status(200).json({ message: "Game updated"});
+        } catch (err) {
+            return res.status(403).json({ error: err.message });
         }
     }
 
