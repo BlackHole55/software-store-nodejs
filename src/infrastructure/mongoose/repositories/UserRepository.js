@@ -3,7 +3,7 @@ import { UserModel } from "../models/UserModel.js";
 
 export class UserRepository {
 
-    async getByEmail() {
+    async getByEmail(email) {
         const user = await UserModel.findOne({ email }).select('+password').lean()
 
         if (!user) return null;
@@ -14,8 +14,12 @@ export class UserRepository {
         };
     }
 
-    async create() {
-        await UserModel.create(user);
+    async create(user) {
+        const userData = {
+            ...user,
+        }
+
+        return await UserModel.create(userData);
     }
 
     async getAll() {
@@ -27,7 +31,7 @@ export class UserRepository {
         }));
     }
 
-    async getById() {
+    async getById(id) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -41,7 +45,7 @@ export class UserRepository {
         } ;
     }
 
-    async update() {
+    async update(id, updatedUser) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -50,7 +54,7 @@ export class UserRepository {
             id,
             {
                 $set: {
-                    ...updates,
+                    ...updatedUser,
                     updated_at: new Date()
                 }
             },
@@ -62,7 +66,7 @@ export class UserRepository {
         }
     }
 
-    async delete() {
+    async delete(id) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
