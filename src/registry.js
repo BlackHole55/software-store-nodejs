@@ -6,7 +6,7 @@ import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepos
 import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
 import { GetAllGamesUseCase } from "./usecases/game/GetAll.js";
 import { GetAllVerifiedGamesUseCase } from "./usecases/game/GetAllVerified.js";
-import { GetByIdGameUseCase } from "./usecases/user/GetById.js";
+import { GetByIdGameUseCase } from "./usecases/game/GetById.js";
 import { GetByIdsGameUseCase } from "./usecases/game/GetByIds";
 import { GetByUserIdGameUseCase } from "./usecases/game/GetByUserId";
 
@@ -52,7 +52,7 @@ export const initRegistry = async () => {
         getByIdsGameUC: getByIdsGameUC, 
         getByUserIdGameUC: getByUserIdGameUC
     });
-    
+
     const userController = new UserController(registerUserUC, loginUserUC,updateUserUC,getAllUserUC,getByIdUserUC, deleteUserUC)
 
     return {
