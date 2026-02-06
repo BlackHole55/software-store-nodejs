@@ -3,7 +3,7 @@ export class DeleteGameUseCase {
         this.gameRepo = gameRepo;
     }
 
-    async execute() {
-        return await this.gameRepo.delete();
+    async execute(id) {
+        return await this.gameRepo.delete(id);
     }
 }
