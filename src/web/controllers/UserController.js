@@ -36,18 +36,18 @@ export class UserController {
         }
     };
 
-    handleUpdate = async (req, res) => {
-        try {
-            const userId = req.params.id || req.user?.id;
-            if (!userId) {
-                return res.status(400).json({ error: "User ID is required" });
-            }
+   handleUpdate = async (req, res) => {
+         try {
+            const { id } = req.params;
+            const userData = req.body;
+            const requestUserId = req.user.id;
+            const requestUserRole= req.user.role;
 
-            const updates = req.body;
-            await this.updateUserUC.execute(userId, updates);
-            return res.status(200).json({ message: "User updated successfully" });
+            await this.updateGameUC.execute(id, userData, requestUserId, requestUserRole);
+
+            return res.status(200).json({ message: "Game updated"});
         } catch (err) {
-            return res.status(404).json({ error: err.message });
+            return res.status(403).json({ error: err.message });
         }
     };
 
