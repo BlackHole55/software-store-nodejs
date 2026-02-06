@@ -1,5 +1,3 @@
-import { CreateGameUseCase } from '../../usecases/game/CreateGame.js';
-
 export class GameController {
     constructor(createGameUC){
         this.createGameUC = createGameUC;
