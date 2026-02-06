@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 export class JwtService {
-    private static getSecret(): string {
+    static getSecret() {
         const secret = process.env.JWT_SECRET;
         
         if (!secret || secret.trim() === "") {
@@ -11,12 +11,12 @@ export class JwtService {
         return secret;
     }
 
-    static generateToken(payload: object): string {
+    static generateToken(payload) {
         const secret = this.getSecret();
         return jwt.sign(payload, secret, { expiresIn: '24h' });
     }
 
-    static verifyToken(token: string): any {
+    static verifyToken(token) {
         try {
             const secret = this.getSecret();
             return jwt.verify(token, secret);

@@ -1,7 +1,6 @@
-import type { Request, Response, NextFunction } from "express";
 import { JwtService } from "../../infrastructure/security/JwtService.js";
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -20,7 +19,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         return res.status(401).json({ error: 'Unauthenticated: Invalid token' });
     }
 
-    (req as any).user = decoded;
+    req.user = decoded;
 
     next();
 }
