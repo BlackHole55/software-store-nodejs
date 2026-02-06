@@ -6,7 +6,7 @@ import type { IUserRepository } from "../../../domain/repositories/IUserReposito
 export class UserRepository implements IUserRepository {
 
     async getByEmail(email: string): Promise<User | null> {
-        const user = await UserModel.findOne({ email }).lean()
+        const user = await UserModel.findOne({ email }).select('+password').lean()
 
         if (!user) return null;
 

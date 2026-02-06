@@ -19,7 +19,8 @@ const userSchema = new Schema<UserDocument>(
       lowercase: true 
     },
     password: { 
-      type: String, 
+      type: String,
+      select: false
     },
     role: { 
       type: String, 
