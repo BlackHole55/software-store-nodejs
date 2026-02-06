@@ -1,11 +1,12 @@
 import bcrypt from "bcryptjs";
-import type { IUserRepository } from "../../domain/repositories/IUserRepository.js";
 import { JwtService } from "../../infrastructure/security/JwtService.js";
 
 export class LoginUserUseCase {
-    constructor(private userRepo: IUserRepository) {}
+    constructor(userRepo) {
+        this.userRepo = userRepo;
+    }
 
-    async execute(email: string, password: string): Promise<{ token: string }> {
+    async execute(email, password) {
         const user = await this.userRepo.getByEmail(email);
         if (!user || !user.password) {
             throw new Error("Invalid email or password");

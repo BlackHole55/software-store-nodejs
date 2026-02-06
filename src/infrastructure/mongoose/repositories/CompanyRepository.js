@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
-import type { Company } from "../../../domain/entities/Company.js";
 import { CompanyModel } from "../models/CompanyModel.js";
-import type { ICompanyRepository } from "../../../domain/repositories/ICompanyRepository.js";
 
 
-export class CompanyRepository implements ICompanyRepository{
-        async create(company: Company): Promise<void> {
+export class CompanyRepository {
+        async create() {
             const companyData = {
                 ...company
             }
@@ -13,23 +11,42 @@ export class CompanyRepository implements ICompanyRepository{
             await CompanyModel.create(companyData);
         }
     
-        async getAll(): Promise<Company[]> {
-            return await CompanyModel.find({}).lean();
+        async getAll() {
+            const companies = await CompanyModel.find({}).lean();
+
+            return companies.map(company => ({
+                ...company,
+                id: company._id.toString(),
+            }));
         }
     
-        async getAllVerified(): Promise<Company[]> {
-            return await CompanyModel.find({ is_verified: true }).lean();
+        async getAllVerified() {
+            const companies = await CompanyModel.find({ is_verified: true }).lean();
+
+            return companies.map(company =>({
+                ...company,
+                id: company._id.toString(),
+            }))
         }
     
-        async getById(id: string): Promise<Company | null> {
+        async getById() {
             if (!mongoose.Types.ObjectId.isValid(id)) {
                 throw new Error("Invalid ID format");
             }
     
-            return await CompanyModel.findById(id).lean();
+            const company = await CompanyModel.findById(id).lean();
+
+            if (!company) {
+                return null;
+            }
+
+            return {
+                ...company,
+                id: company._id.toString(),
+            };
         }
     
-        async update(id: string, updates: Partial<Company>): Promise<void> {
+        async update() {
             if (!mongoose.Types.ObjectId.isValid(id)) {
                 throw new Error("Invalid ID format");
             }
@@ -50,7 +67,7 @@ export class CompanyRepository implements ICompanyRepository{
             }
         }
     
-        async delete(id: string): Promise<void> {
+        async delete() {
             if (!mongoose.Types.ObjectId.isValid(id)) {
                 throw new Error("Invalid ID format");
             }

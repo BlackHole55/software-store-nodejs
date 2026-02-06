@@ -1,9 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
-import type { Company } from '../../../domain/entities/Company.js';
 
-export interface CompanyDocument extends Omit<Company, 'id'>, Document {}
 
-const companySchema = new Schema<CompanyDocument>(
+const companySchema = new Schema(
   {
     name: { 
       type: String, 
@@ -19,7 +17,7 @@ const companySchema = new Schema<CompanyDocument>(
       required: true 
     },
     contacts: {
-      email: { type: String, lowercase: true, trim: true },
+      email: { type: String, trim: true },
       phone: { type: String, trim: true },
       website: { type: String, trim: true }
     },
@@ -36,4 +34,4 @@ const companySchema = new Schema<CompanyDocument>(
   }
 );
 
-export const CompanyModel = model<CompanyDocument>('Company', companySchema, 'companies');
+export const CompanyModel = model('Company', companySchema, 'companies');

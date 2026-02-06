@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
-import type { User } from "../../../domain/entities/User.js";
 import { UserModel } from "../models/UserModel.js";
-import type { IUserRepository } from "../../../domain/repositories/IUserRepository.js";
 
-export class UserRepository implements IUserRepository {
+export class UserRepository {
 
-    async getByEmail(email: string): Promise<User | null> {
+    async getByEmail() {
         const user = await UserModel.findOne({ email }).select('+password').lean()
 
         if (!user) return null;
@@ -16,20 +14,20 @@ export class UserRepository implements IUserRepository {
         };
     }
 
-    async create(user: User): Promise<void> {
+    async create() {
         await UserModel.create(user);
     }
 
-    async getAll(): Promise<User[]> {
+    async getAll() {
         const users = await UserModel.find({}).lean();
     
         return users.map(user => ({
             ...user,
             id: user._id.toString(),
-        })) as User[];
+        }));
     }
 
-    async getById(id: string): Promise<User | null> {
+    async getById() {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -40,10 +38,10 @@ export class UserRepository implements IUserRepository {
         return {
             ...user,
             id: user._id.toString(),
-        } as User;
+        } ;
     }
 
-    async update(id: string, updates: Partial<User>): Promise<void> {
+    async update() {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -64,7 +62,7 @@ export class UserRepository implements IUserRepository {
         }
     }
 
-    async delete(id: string): Promise<void> {
+    async delete() {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }

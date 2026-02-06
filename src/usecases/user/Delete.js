@@ -1,9 +1,9 @@
-import type { IUserRepository } from "../../domain/repositories/IUserRepository.js";
-
 export class DeleteUserUseCase{
-    constructor(private userRepo: IUserRepository) {}
+    constructor(userRepo) {
+        this.userRepo = userRepo;
+    }
     
-    async execute(userId: string): Promise<void> {    
+    async execute(){    
         const existingUser = await this.userRepo.getById(userId);
         
         if (!existingUser) {
