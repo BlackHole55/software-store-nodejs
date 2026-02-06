@@ -85,8 +85,7 @@ export class GameRepository {
             id,
             {
                 $set: {
-                    ...updates,
-                    updatedAt: new Date()
+                    ...updates
                 }
             },
             { runValidators: true }
