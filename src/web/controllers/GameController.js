@@ -1,8 +1,18 @@
-import { CreateGameUseCase } from '../../usecases/game/CreateGame.js';
-
 export class GameController {
-    constructor(createGameUC){
+    constructor({
+        createGameUC, 
+        getAllUC, 
+        getAllVerifiedUC, 
+        getByIdUC, 
+        getByIdsUC, 
+        getByUserIdUC
+    }) {
         this.createGameUC = createGameUC;
+        this.getAllUC = getAllUC;
+        this.getAllVerifiedUC = getAllVerifiedUC,
+        this.getByIdUC = getByIdUC,
+        this.getByIdsUC = getByIdsUC,
+        this.getByUserIdUC = getByUserIdUC
     }
 
     handleCreate = async (req, res) => {
@@ -15,6 +25,16 @@ export class GameController {
             return res.status(201).json({ message: "Game created successfuly" });
         } catch (err) {
             return res.status(400).json({ error: err.message });
+        }
+    }
+
+    handleGetAll = async (req, res) => {
+        try {
+            const games = await this.getAllUC.execute();
+
+            return res.status(200).json(games)
+        } catch (err) {
+            return res.status()
         }
     }
 }

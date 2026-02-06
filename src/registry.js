@@ -3,9 +3,10 @@ import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepos
 import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepository";
 
 // import Game Use Cases
-import { CreateGameUseCase } from "./usecases/game/CreateGame";
-import { GetAllGamesUseCase } from "./usecases/game/GetAll";
-import { GetByIdGameUseCase } from "./usecases/user/GetById";
+import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
+import { GetAllGamesUseCase } from "./usecases/game/GetAll.js";
+import { GetAllVerifiedGamesUseCase } from "./usecases/game/GetAllVerified.js";
+import { GetByIdGameUseCase } from "./usecases/user/GetById.js";
 import { GetByIdsGameUseCase } from "./usecases/game/GetByIds";
 import { GetByUserIdGameUseCase } from "./usecases/game/GetByUserId";
 
@@ -28,6 +29,11 @@ export const initRegistry = async () => {
 
     // Initialize Game Use Cases
     const createGameUC = new CreateGameUseCase(gameRepo);
+    const getAllGamesUC = new GetAllGamesUseCase(gameRepo);
+    const getAllVerifiedGamesUC = new GetAllVerifiedGamesUseCase(gameRepo);
+    const getByIdGameUC = new GetByIdGameUseCase(gameRepo);
+    const getByIdsGameUC = new GetByIdsGameUseCase(gameRepo);
+    const getByUserIdGameUC = new GetByUserIdGameUseCase(gameRepo);
 
     // Initialize User Use Cases
     const registerUserUC = new RegisterUserUseCase(userRepo);
@@ -38,7 +44,15 @@ export const initRegistry = async () => {
     const deleteUserUC = new DeleteUserUseCase(userRepo)
 
     // Initialize Controllers
-    const gameController = new GameController(createGameUC);
+    const gameController = new GameController({
+        createGameUC: createGameUC, 
+        getAllGamesUC: getAllGamesUC, 
+        getAllVerifiedGamesUC: getAllVerifiedGamesUC, 
+        getByIdGameUC: getByIdGameUC, 
+        getByIdsGameUC: getByIdsGameUC, 
+        getByUserIdGameUC: getByUserIdGameUC
+    });
+    
     const userController = new UserController(registerUserUC, loginUserUC,updateUserUC,getAllUserUC,getByIdUserUC, deleteUserUC)
 
     return {
