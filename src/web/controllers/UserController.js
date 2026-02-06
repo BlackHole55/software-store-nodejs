@@ -45,7 +45,7 @@ export class UserController {
 
             await this.updateGameUC.execute(id, userData, requestUserId, requestUserRole);
 
-            return res.status(200).json({ message: "Game updated"});
+            return res.status(200).json({ message: "User updated"});
         } catch (err) {
             return res.status(403).json({ error: err.message });
         }
@@ -62,7 +62,7 @@ export class UserController {
 
     handleGetById = async (req, res) => {
         try {
-            const userId = req.params.id;
+            const { userId } = req.params;
             const user = await this.getByIdUserUC.execute(userId);
             if (!user) return res.status(404).json({ error: "User not found" });
             
@@ -93,7 +93,7 @@ export class UserController {
 
     handleDelete = async (req, res) => {
         try {
-            const userId = req.params.id;
+            const { userId } = req.params;
             if (!userId) {
                 return res.status(400).json({ error: "User ID is required" });
             }
