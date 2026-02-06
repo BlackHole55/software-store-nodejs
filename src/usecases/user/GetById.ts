@@ -9,7 +9,6 @@ export class GetByIdUserUseCase{
             if (!user) {
                 throw new Error(`User with ID ${userId} not found`);
             }
-
             return user;
         }
 }
