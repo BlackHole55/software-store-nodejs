@@ -1,4 +1,4 @@
-export class GetByIdsGameUseCase {
+export class GetUserLibraryWithDetailsUseCase {
     constructor(gameRepo, userRepo) {
         this.gameRepo = gameRepo;
         this.userRepo = userRepo;
