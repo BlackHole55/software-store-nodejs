@@ -18,6 +18,7 @@ const GameSchema = new Schema(
         },
         user_id: {
             type: Schema.Types.ObjectId,
+            required: [true, 'User ID is required'],
             ref: 'User'
         },
         original_system: {
