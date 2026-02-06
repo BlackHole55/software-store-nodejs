@@ -10,5 +10,7 @@ export const userRouter = (controller) => {
     router.post('/signup', validate(userSchema), controller.handleRegister);
     router.post('/login', (req, res) => controller.handleLogin(req, res));
     router.put('/:id', authMiddleware, validate(updateUserSchema), controller.handleUpdate);
+    router.get('/admin', authMiddleware, controller.handleGetAll);
+    router.get('/:id', controller.handleGetById);
     return router;
 }
