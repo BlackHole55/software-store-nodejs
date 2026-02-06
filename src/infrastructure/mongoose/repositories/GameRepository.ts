@@ -18,11 +18,21 @@ export class GameRepository implements IGameRepository {
     }
 
     async getAll(): Promise<Game[]> {
-        return await GameModel.find({}).lean();
+        const games = await GameModel.find({}).lean();
+        
+        return games.map(game => ({
+            ...game,
+            id: game._id.toString(),
+        })) as Game[];
     }
 
     async getAllVerified(): Promise<Game[]> {
-        return await GameModel.find({ isVerified: true }).lean();
+        const verifiedGames = await GameModel.find({ isVerified: true }).lean();
+        
+        return verifiedGames.map(game => ({
+            ...game,
+            id: game._id.toString(),
+        })) as Game[];
     }
 
     async getById(id: string): Promise<Game | null> {
@@ -30,7 +40,14 @@ export class GameRepository implements IGameRepository {
             throw new Error("Invalid ID format");
         }
 
-        return await GameModel.findById(id).lean();
+        const game = await GameModel.findById(id).lean(); 
+
+        if (!game) return null;
+
+        return {
+            ...game,
+            id: game._id.toString(),
+        }
     }
 
     async getByIds(ids: string[]): Promise<Game[]> {
@@ -42,7 +59,10 @@ export class GameRepository implements IGameRepository {
             _id: { $in: validObjectIds }
         }).lean();
 
-        return games as Game[];
+        return games.map(game => ({
+            ...game,
+            id: game._id.toString(),
+        })) as Game[];
     }
 
     async getByUserId(userId: string): Promise<Game[]> {
@@ -50,7 +70,12 @@ export class GameRepository implements IGameRepository {
             throw new Error("Invalid User ID format");
         }
 
-        return await GameModel.find({ userId: userId }).lean();
+        const games = await GameModel.find({ userId: userId }).lean();
+
+        return games.map(game => ({
+            ...game,
+            id: game._id.toString(),
+        })) as Game[];
     }
 
     async update(id: string, updates: Partial<Game>): Promise<void> {
@@ -136,6 +161,9 @@ export class GameRepository implements IGameRepository {
             title: titleRegex
         }).lean();
 
-        return games as Game[]
+        return games.map(game => ({
+            ...game,
+            id: game._id.toString(),
+        })) as Game[];
     }
 }
