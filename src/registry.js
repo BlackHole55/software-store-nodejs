@@ -4,6 +4,7 @@ import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepos
 
 // import Game Use Cases
 import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
+import { UpdateGameUseCase } from "./usecases/game/Update.js";
 import { GetAllGamesUseCase } from "./usecases/game/GetAll.js";
 import { GetAllVerifiedGamesUseCase } from "./usecases/game/GetAllVerified.js";
 import { GetByIdGameUseCase } from "./usecases/game/GetById.js";
@@ -29,6 +30,7 @@ export const initRegistry = async () => {
 
     // Initialize Game Use Cases
     const createGameUC = new CreateGameUseCase(gameRepo);
+    const updateGameUc = new UpdateGameUseCase(gameRepo);
     const getAllGamesUC = new GetAllGamesUseCase(gameRepo);
     const getAllVerifiedGamesUC = new GetAllVerifiedGamesUseCase(gameRepo);
     const getByIdGameUC = new GetByIdGameUseCase(gameRepo);
@@ -46,6 +48,7 @@ export const initRegistry = async () => {
     // Initialize Controllers
     const gameController = new GameController({
         createGameUC: createGameUC, 
+        updateGameUC: updateGameUc,
         getAllGamesUC: getAllGamesUC, 
         getAllVerifiedGamesUC: getAllVerifiedGamesUC, 
         getByIdGameUC: getByIdGameUC, 
