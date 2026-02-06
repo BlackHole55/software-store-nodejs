@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const gameCreateSchema = z.object({
+export const createGameSchema = z.object({
     body: z .object({
         title: z.string().min(1),
         description: z.string().optional(),
