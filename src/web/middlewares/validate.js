@@ -1,7 +1,7 @@
 import { error } from "console";
 import { parse } from "path";
 
-export const validate = (schema) = async (req, res, next) => {
+export const validate = (schema) => async (req, res, next) => {
     try {
         const parsed = await schema.parseAsync({
             body: req.body,
