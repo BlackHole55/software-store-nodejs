@@ -7,7 +7,7 @@ import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
 import { GetAllGamesUseCase } from "./usecases/game/GetAll.js";
 import { GetAllVerifiedGamesUseCase } from "./usecases/game/GetAllVerified.js";
 import { GetByIdGameUseCase } from "./usecases/game/GetById.js";
-import { GetByIdsGameUseCase } from "./usecases/game/GetByIds";
+import { GetUserLibraryWithDetailsUseCase } from "./usecases/game/GetUserLibraryWithDetails.js";
 import { GetByUserIdGameUseCase } from "./usecases/game/GetByUserId";
 
 // import User Use Cases
@@ -32,7 +32,7 @@ export const initRegistry = async () => {
     const getAllGamesUC = new GetAllGamesUseCase(gameRepo);
     const getAllVerifiedGamesUC = new GetAllVerifiedGamesUseCase(gameRepo);
     const getByIdGameUC = new GetByIdGameUseCase(gameRepo);
-    const getByIdsGameUC = new GetByIdsGameUseCase(gameRepo);
+    const getUserLibraryWithDetailsUC = new GetUserLibraryWithDetailsUseCase(gameRepo, userRepo);
     const getByUserIdGameUC = new GetByUserIdGameUseCase(gameRepo);
 
     // Initialize User Use Cases
@@ -49,7 +49,7 @@ export const initRegistry = async () => {
         getAllGamesUC: getAllGamesUC, 
         getAllVerifiedGamesUC: getAllVerifiedGamesUC, 
         getByIdGameUC: getByIdGameUC, 
-        getByIdsGameUC: getByIdsGameUC, 
+        getUserLibraryWithDetailsUC: getUserLibraryWithDetailsUC, 
         getByUserIdGameUC: getByUserIdGameUC
     });
 
