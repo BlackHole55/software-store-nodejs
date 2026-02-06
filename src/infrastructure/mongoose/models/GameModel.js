@@ -1,18 +1,14 @@
 import mongoose, { Schema, Document, SchemaType } from "mongoose";
-import type { Game } from "../../../domain/entities/Game.js";
 
-export interface GameDocument extends Omit<Game, 'id'>, Document {}
-
-const GameSchema = new Schema<GameDocument>(
+const GameSchema = new Schema(
     {
         publisher_id: {
-            // Use the 'as any' shortcut to align with the string interface
-            type: Schema.Types.ObjectId as any,
+            type: Schema.Types.ObjectId,
             required: [true, 'Publisher ID is required'],
             ref: 'Publisher'
         },
         developer_id: { 
-            type: Schema.Types.ObjectId as any, 
+            type: Schema.Types.ObjectId, 
             required: [true, 'Developer ID is required'], 
             ref: 'Developer'
         },
@@ -62,4 +58,4 @@ const GameSchema = new Schema<GameDocument>(
     }
 )
 
-export const GameModel = mongoose.model<GameDocument>('Game', GameSchema, 'games');
+export const GameModel = mongoose.model('Game', GameSchema, 'games');

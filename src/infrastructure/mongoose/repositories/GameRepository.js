@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
-import type { IGameRepository } from "../../../domain/repositories/IGameRepository.js";
-import type { Game } from "../../../domain/entities/Game.js";
 import { GameModel } from "../models/GameModel.js";
 
-export class GameRepository implements IGameRepository {
-    async create(game: Game, userId: string): Promise<void> {
+export class GameRepository {
+    async create(game, userId) {
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             throw new Error("Invalid User ID format");
         }
@@ -17,25 +15,25 @@ export class GameRepository implements IGameRepository {
         await GameModel.create(gameData);
     }
 
-    async getAll(): Promise<Game[]> {
+    async getAll() {
         const games = await GameModel.find({}).lean();
         
         return games.map(game => ({
             ...game,
             id: game._id.toString(),
-        })) as Game[];
+        }));
     }
 
-    async getAllVerified(): Promise<Game[]> {
+    async getAllVerified() {
         const verifiedGames = await GameModel.find({ isVerified: true }).lean();
         
         return verifiedGames.map(game => ({
             ...game,
             id: game._id.toString(),
-        })) as Game[];
+        }));
     }
 
-    async getById(id: string): Promise<Game | null> {
+    async getById(id){
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -50,7 +48,7 @@ export class GameRepository implements IGameRepository {
         }
     }
 
-    async getByIds(ids: string[]): Promise<Game[]> {
+    async getByIds(ids) {
         const validObjectIds = ids
             .filter(id => mongoose.Types.ObjectId.isValid(id))
             .map(id => new mongoose.Types.ObjectId(id));
@@ -62,10 +60,10 @@ export class GameRepository implements IGameRepository {
         return games.map(game => ({
             ...game,
             id: game._id.toString(),
-        })) as Game[];
+        }));
     }
 
-    async getByUserId(userId: string): Promise<Game[]> {
+    async getByUserId(userId){
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             throw new Error("Invalid User ID format");
         }
@@ -75,10 +73,10 @@ export class GameRepository implements IGameRepository {
         return games.map(game => ({
             ...game,
             id: game._id.toString(),
-        })) as Game[];
+        }));
     }
 
-    async update(id: string, updates: Partial<Game>): Promise<void> {
+    async update(id, updates){
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -99,7 +97,7 @@ export class GameRepository implements IGameRepository {
         }
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(id) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -111,7 +109,7 @@ export class GameRepository implements IGameRepository {
         }
     }
 
-    async verify(id: string): Promise<void> {
+    async verify(id) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -132,7 +130,7 @@ export class GameRepository implements IGameRepository {
         }
     }
 
-    async unverify(id: string): Promise<void> {
+    async unverify(id){
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -153,7 +151,7 @@ export class GameRepository implements IGameRepository {
         }
     }
 
-    async searchByTitle(title: string): Promise<Game[]> {
+    async searchByTitle(title) {
         const titleRegex = new RegExp(title, 'i');
 
         const games = await GameModel.find({
@@ -164,6 +162,6 @@ export class GameRepository implements IGameRepository {
         return games.map(game => ({
             ...game,
             id: game._id.toString(),
-        })) as Game[];
+        }));
     }
 }

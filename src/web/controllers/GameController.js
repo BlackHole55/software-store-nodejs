@@ -1,22 +1,19 @@
-import type { Request, Response } from 'express';
 import { CreateGameUseCase } from '../../usecases/game/CreateGame.js';
 
 export class GameController {
-    constructor(
-        private createGameUC: CreateGameUseCase
-    ){}
+    constructor(createGameUC){
+        this.createGameUC = createGameUC;
+    }
 
-    async handleCreate(req: Request, res: Response) {
+    handleCreate = async (req, res) => {
         try {
             const gameData = req.body;
-            // TODO: implement authentification
-            // const userId = req.headers
-            const userId = (req as any).user.id;
+            const userId = (req).user.id;
 
             await this.createGameUC.execute(gameData, userId);
 
             return res.status(201).json({ message: "Game created successfuly" });
-        } catch (err: any) {
+        } catch (err) {
             return res.status(400).json({ error: err.message });
         }
     }
