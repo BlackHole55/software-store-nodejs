@@ -2,14 +2,16 @@ export class GameController {
     constructor({
         createGameUC, 
         updateGameUC,
+        deleteGameUC,
         getAllGamesUC, 
         getAllVerifiedGamesUC, 
         getByIdGameUC, 
         getUserLibraryWithDetailsUC, 
         getByUserIdGameUC
     }) {
-        this.createGameUC = createGameUC;
-        this.updateGameUC = updateGameUC;
+        this.createGameUC = createGameUC,
+        this.updateGameUC = updateGameUC,
+        this.deleteGameUC = deleteGameUC,
         this.getAllGamesUC = getAllGamesUC;
         this.getAllVerifiedGamesUC = getAllVerifiedGamesUC,
         this.getByIdGameUC = getByIdGameUC,
@@ -25,6 +27,18 @@ export class GameController {
             await this.createGameUC.execute(gameData, userId);
 
             return res.status(201).json({ message: "Game created successfuly" });
+        } catch (err) {
+            return res.status(400).json({ error: err.message });
+        }
+    }
+
+    handleDelete = async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            await this.deleteGameUC.execute(id);
+
+            return res.status(204).json({ message: "Game deleted"});
         } catch (err) {
             return res.status(400).json({ error: err.message });
         }
