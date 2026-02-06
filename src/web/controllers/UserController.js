@@ -1,19 +1,13 @@
-import { RegisterUserUseCase } from "../../usecases/user/RegisterUser.js";
-import { LoginUserUseCase } from '../../usecases/user/LoginUser.js';
-import { UpdateUserUseCase } from '../../usecases/user/Update.js';
-import { GetByIdUserUseCase } from '../../usecases/user/GetById.js';
-import { GetAllUsersUseCase } from '../../usecases/user/GetAll.js';
-import { DeleteUserUseCase } from '../../usecases/user/Delete.js';
-
 export class UserController {
     constructor(
         registerUserUC,
         loginUserUC,
         updateUserUC,
-        getByIdUserUC,
         getAllUserUC,
+        getByIdUserUC,
         deleteUserUC
-    ) {
+    )
+    {
         this.registerUserUC = registerUserUC;
         this.loginUserUC = loginUserUC;
         this.updateUserUC = updateUserUC;
@@ -62,8 +56,7 @@ export class UserController {
             const users = await this.getAllUserUC.execute();
             return res.status(200).json(users);
         } catch (err) {
-            const statusCode = err.message === "No users found" ? 404 : 500;
-            return res.status(statusCode).json({ error: err.message });
+            return res.status(500).json({ error: err.message });
         }
     };
 
@@ -113,8 +106,7 @@ export class UserController {
             await this.deleteUserUC.execute(userId);
             return res.status(200).json({ message: "User deleted successfully" });
         } catch (err) {
-            const statusCode = err.message.includes("not found") ? 404 : 500;
-            return res.status(statusCode).json({ error: err.message });
+            return res.status(400).json({ error: err.message });
         }
     };
 }
