@@ -21,15 +21,26 @@ export class UserRepository implements IUserRepository {
     }
 
     async getAll(): Promise<User[]> {
-        return await UserModel.find({}).lean();
+        const users = await UserModel.find({}).lean();
+    
+        return users.map(user => ({
+            ...user,
+            id: user._id.toString(),
+        })) as User[];
     }
 
     async getById(id: string): Promise<User | null> {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
+        const user = await UserModel.findById(id).lean();
 
-        return await UserModel.findById(id).lean();
+        if (!user) return null;
+
+        return {
+            ...user,
+            id: user._id.toString(),
+        } as User;
     }
 
     async update(id: string, updates: Partial<User>): Promise<void> {
