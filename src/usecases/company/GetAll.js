@@ -1,19 +1,15 @@
-
-
-
 export class GetAllCompanyUseCase{
-   
     constructor(companyRepo) {
         this.companyRepo = companyRepo;
     }
 
     async execute() {
-        const users = await this.userRepo.getAll();
+        const companies = await this.companyRepo.getAll();
 
-        if (!users || users.length === 0) {
-            throw new Error("No users found");
+        if (!company || company.length == 0) {
+            throw new Error("No company found");
         }
 
-        return users
+        return companies
     }
 }
