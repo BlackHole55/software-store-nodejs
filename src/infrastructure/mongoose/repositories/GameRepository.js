@@ -83,12 +83,7 @@ export class GameRepository {
 
         const result = await GameModel.findByIdAndUpdate(
             id,
-            {
-                $set: {
-                    ...updates,
-                    updatedAt: new Date()
-                }
-            },
+            { $set: updates },
             { runValidators: true }
         );
 
