@@ -1,7 +1,5 @@
 import bcrypt from "bcryptjs";
 
-import bcrypt from "bcryptjs";
-
 export class RegisterUserUseCase {
     constructor(userRepo) {
         this.userRepo = userRepo;
