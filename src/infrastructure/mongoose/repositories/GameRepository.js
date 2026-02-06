@@ -9,7 +9,7 @@ export class GameRepository {
 
         const gameData = {
             ...game,
-            userId: userId
+            user_id: userId
         }
 
         await GameModel.create(gameData);
@@ -85,7 +85,7 @@ export class GameRepository {
             id,
             { $set: updates },
             { runValidators: true }
-        );
+        ).lean();
 
         if (!result) {
             throw new Error("Not Found");
