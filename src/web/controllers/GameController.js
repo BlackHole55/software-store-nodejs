@@ -2,19 +2,19 @@ export class GameController {
     constructor({
         createGameUC, 
         updateGameUC,
-        getAllUC, 
-        getAllVerifiedUC, 
-        getByIdUC, 
+        getAllGamesUC, 
+        getAllVerifiedGamesUC, 
+        getByIdGameUC, 
         getUserLibraryWithDetailsUC, 
-        getByUserIdUC
+        getByUserIdGameUC
     }) {
         this.createGameUC = createGameUC;
         this.updateGameUC = updateGameUC;
-        this.getAllUC = getAllUC;
-        this.getAllVerifiedUC = getAllVerifiedUC,
-        this.getByIdUC = getByIdUC,
+        this.getAllGamesUC = getAllGamesUC;
+        this.getAllVerifiedGamesUC = getAllVerifiedGamesUC,
+        this.getByIdGameUC = getByIdGameUC,
         this.getUserLibraryWithDetailsUC = getUserLibraryWithDetailsUC,
-        this.getByUserIdUC = getByUserIdUC
+        this.getByUserIdGameUC = getByUserIdGameUC
     }
 
     handleCreate = async (req, res) => {
@@ -47,7 +47,7 @@ export class GameController {
 
     handleGetAll = async (req, res) => {
         try {
-            const games = await this.getAllUC.execute();
+            const games = await this.getAllGamesUC.execute();
 
             return res.status(200).json(games);
         } catch (err) {
@@ -57,7 +57,7 @@ export class GameController {
 
     handleGetAllVerified = async (req, res) => {
         try {
-            const games = await this.getAllVerifiedUC.execute();
+            const games = await this.getAllVerifiedGamesUC.execute();
             return res.status(200).json(games);
         } catch (err) {
             return res.status(500).json({ error: err.message });
@@ -67,7 +67,7 @@ export class GameController {
     handleGetById = async (req, res) => {
         try {
             const { id } = req.params;
-            const game = await this.getByIdUC.execute(id);
+            const game = await this.getByIdGameUC.execute(id);
 
             if (!game) return res.status(404).json({ error: "Game not found" });
 
@@ -96,7 +96,7 @@ export class GameController {
     handleGetByUserId = async (req, res) => {
         try {
             const userId = req.user.id;
-            const games = await this.getByUserIdUC.execute(userId);
+            const games = await this.getByUserIdGameUC.execute(userId);
             return res.status(200).json(games);
         } catch (err) {
             return res.status(400).json({ error: err.message });
