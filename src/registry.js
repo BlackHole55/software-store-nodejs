@@ -2,6 +2,7 @@
 import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepository.js";
 import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepository.js";
 import { CompanyRepository } from "./infrastructure/mongoose/repositories/CompanyRepository.js";
+import { PurchaseRepository } from "./infrastructure/mongoose/repositories/PurchaseRepository.js";
 
 // import Game Use Cases
 import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
@@ -30,11 +31,18 @@ import { DeleteCompanyUseCase } from "./usecases/company/Delete.js";
 import { GetAllVerifiedCompaniesUseCase } from "./usecases/company/GetAllVerified.js";
 import { VerifyCompanyUseCase } from "./usecases/company/VerifyCompany.js";
 
+// import Purchase Use Cases
+import { CreatePurchaseUseCase } from "./usecases/purchase/Create.js";
+import { GetAllPurchaseUseCase } from "./usecases/purchase/GetAll.js";
+import { GetByIdPurchaseUseCase } from "./usecases/purchase/GetById.js";
+import { DeletePurchaseUseCase } from "./usecases/purchase/Delete.js";
 
 // import Controllers
 import { GameController } from "./web/controllers/GameController.js";
 import { UserController } from "./web/controllers/UserController.js";
 import { CompanyController } from "./web/controllers/CompanyController.js";
+import { PurchaseController } from "./web/controllers/PurchaseController.js";
+import { Purchase } from "./infrastructure/mongoose/models/PurchaseModel.js";
 
 
 export const initRegistry = async () => {
@@ -42,6 +50,7 @@ export const initRegistry = async () => {
     const gameRepo = new GameRepository();
     const userRepo = new UserRepository();
     const companyRepo = new CompanyRepository();
+    const purchaseRepo = new PurchaseRepository();
 
     // Initialize Game Use Cases
     const createGameUC = new CreateGameUseCase(gameRepo);
@@ -69,6 +78,12 @@ export const initRegistry = async () => {
     const deleteCompanyUC = new DeleteCompanyUseCase(companyRepo);
     const getAllVerifiedCompaniesUC = new GetAllVerifiedCompaniesUseCase(companyRepo);
     const verifyCompanyUC = new VerifyCompanyUseCase(companyRepo);
+
+    // Initialize Purchase Use Cases
+    const createPurchaseUC = new CreatePurchaseUseCase(purchaseRepo, userRepo);
+    const getAllPurchaseUC = new GetAllPurchaseUseCase(purchaseRepo);
+    const getByIdPurchaseUC = new GetByIdPurchaseUseCase(purchaseRepo);
+    const deletePurchaseUC = new DeletePurchaseUseCase(purchaseRepo);
 
     // Initialize Controllers
     const gameController = new GameController({
@@ -100,9 +115,15 @@ export const initRegistry = async () => {
         getAllVerifiedCompaniesUC: getAllVerifiedCompaniesUC, 
         verifyCompanyUC: verifyCompanyUC
     });
+
+    const purchaseController = new PurchaseController({
+
+    })
+
     return {
         gameController,
         userController,
-        companyController
+        companyController,
+        purchaseController
     }
 }
