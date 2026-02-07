@@ -3,7 +3,7 @@ export class DeleteUserUseCase{
         this.userRepo = userRepo;
     }
     
-    async execute(){    
-        await this.userRepo.delete(userId);
+    async execute(id){    
+        await this.userRepo.delete(id);
     }
 }
