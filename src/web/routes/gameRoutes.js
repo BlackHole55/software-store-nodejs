@@ -23,7 +23,10 @@ export const gameRouter = (controller) => {
     // Admin routes
     const admin = Router();
     admin.use(roleMiddleware("admin"));
-    admin.get('/:id', controller.handleGetById);
+    admin.get('/', authMiddleware, controller.handleGetAll);
+
+    auth.use('/admin', admin);
+    router.use('/', auth);
 
     return router;
 }
