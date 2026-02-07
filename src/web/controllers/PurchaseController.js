@@ -1,11 +1,19 @@
 export class PurchaseController {
-    constructor({ purchaseUC }) {
-        this.purchaseUC = purchaseUC;
+    constructor({ 
+        createPurchaseUC,
+        getAllPurchaseUC,
+        getByIdPurchaseUC,
+        deletePurchaseUC
+     }) {
+        this.createPurchaseUC = createPurchaseUC;
+        this.getAllPurchaseUC = getAllPurchaseUC;
+        this.getByIdPurchaseUC = getByIdPurchaseUC;
+        this.deletePurchaseUC = deletePurchaseUC;
     }
 
     handleCreate = async (req, res) => {
         try {
-            await this.purchaseUC.create(req.body);
+            await this.createPurchaseUC.execute(req.body);
             
             return res.status(201).json({ 
                 message: "Purchase created successfully" 
@@ -17,7 +25,7 @@ export class PurchaseController {
 
     handleGetAll = async (req, res) => {
         try {
-            const purchases = await this.purchaseUC.getAll();
+            const purchases = await this.getAllPurchaseUC.execute();
             return res.status(200).json(purchases);
         } catch (err) {
             return res.status(500).json({ error: err.message });
@@ -27,7 +35,7 @@ export class PurchaseController {
     handleGetById = async (req, res) => {
         try {
             const { id } = req.params;
-            const purchase = await this.purchaseUC.getById(id);
+            const purchase = await this.getByIdPurchaseUC.execute(id);
             
             return res.status(200).json(purchase);
         } catch (err) {
@@ -39,7 +47,7 @@ export class PurchaseController {
     handleDelete = async (req, res) => {
         try {
             const { id } = req.params;
-            await this.purchaseUC.delete(id);
+            await this.deletePurchaseUC.execute(id);
             
             return res.status(200).json({ 
                 message: "Purchase deleted successfully" 
