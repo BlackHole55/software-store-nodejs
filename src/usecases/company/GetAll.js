@@ -6,7 +6,7 @@ export class GetAllCompanyUseCase{
     async execute() {
         const companies = await this.companyRepo.getAll();
 
-        if (!company || company.length == 0) {
+        if (!companies || companies.length == 0) {
             throw new Error("No company found");
         }
 

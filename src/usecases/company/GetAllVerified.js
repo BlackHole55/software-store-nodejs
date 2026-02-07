@@ -1,15 +1,15 @@
-export class GetByIdCompanyUseCase{
+export class GetAllVerifiedCompaniesUseCase{
     constructor(companyRepo) {
         this.companyRepo = companyRepo;
     }
 
     async execute() {
-        const company = await this.companyRepo.getById(id);
+        const companies = await this.companyRepo.getAllVerified();
        
-        if (!company || company.length == 0) {
+        if (!companies || companies.length == 0) {
             throw new Error("No company found");
         }
 
-        return company;
+        return companies;
     }
 }

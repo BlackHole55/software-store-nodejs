@@ -1,6 +1,3 @@
-
-
-
 export class DeleteCompanyUseCase{
     constructor(companyRepo) {
         this.companyRepo = companyRepo;
