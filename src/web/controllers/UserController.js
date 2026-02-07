@@ -1,12 +1,12 @@
 export class UserController {
-    constructor(
+    constructor({
         registerUserUC,
         loginUserUC,
         updateUserUC,
         getAllUserUC,
         getByIdUserUC,
         deleteUserUC
-    )
+    })
     {
         this.registerUserUC = registerUserUC;
         this.loginUserUC = loginUserUC;
@@ -43,7 +43,7 @@ export class UserController {
             const requestUserId = req.user.id;
             const requestUserRole= req.user.role;
 
-            await this.updateGameUC.execute(id, userData, requestUserId, requestUserRole);
+            await this.updateUserUC.execute(id, userData, requestUserId, requestUserRole);
 
             return res.status(200).json({ message: "User updated"});
         } catch (err) {
@@ -62,8 +62,8 @@ export class UserController {
 
     handleGetById = async (req, res) => {
         try {
-            const { userId } = req.params;
-            const user = await this.getByIdUserUC.execute(userId);
+            const { id } = req.params;
+            const user = await this.getByIdUserUC.execute(id);
             if (!user) return res.status(404).json({ error: "User not found" });
             
             return res.status(200).json(user);
@@ -74,12 +74,12 @@ export class UserController {
 
     handleGetProfile = async (req, res) => {
         try {
-            const userID = req.user?.id;
-            if (!userID) {
+            const id = req.user?.id;
+            if (!id) {
                 return res.status(401).json({ error: "Unauthorized" });
             }
 
-            const user = await this.getByIdUserUC.execute(userID);
+            const user = await this.getByIdUserUC.execute(id);
             if (!user) {
                 return res.status(404).json({ error: "User not found" });
             }
@@ -93,17 +93,17 @@ export class UserController {
 
     handleDelete = async (req, res) => {
         try {
-            const { userId } = req.params;
-            if (!userId) {
+            const { id } = req.params;
+            if (!id) {
                 return res.status(400).json({ error: "User ID is required" });
             }
 
             const currentUserId = req.user?.id;
-            if (currentUserId === userId) {
+            if (currentUserId === id) {
                 return res.status(400).json({ error: "You cannot delete your own account" });
             }
 
-            await this.deleteUserUC.execute(userId);
+            await this.deleteUserUC.execute(id);
             return res.status(200).json({ message: "User deleted successfully" });
         } catch (err) {
             return res.status(400).json({ error: err.message });
