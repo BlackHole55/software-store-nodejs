@@ -7,7 +7,8 @@ export class GameController {
         getAllVerifiedGamesUC, 
         getByIdGameUC, 
         getUserLibraryWithDetailsUC, 
-        getByUserIdGameUC
+        getByUserIdGameUC,
+        verifySwitchUC
     }) {
         this.createGameUC = createGameUC,
         this.updateGameUC = updateGameUC,
@@ -16,7 +17,8 @@ export class GameController {
         this.getAllVerifiedGamesUC = getAllVerifiedGamesUC,
         this.getByIdGameUC = getByIdGameUC,
         this.getUserLibraryWithDetailsUC = getUserLibraryWithDetailsUC,
-        this.getByUserIdGameUC = getByUserIdGameUC
+        this.getByUserIdGameUC = getByUserIdGameUC,
+        this.verifySwitchUC = verifySwitchUC
     }
 
     handleCreate = async (req, res) => {
@@ -114,6 +116,24 @@ export class GameController {
             return res.status(200).json(games);
         } catch (err) {
             return res.status(400).json({ error: err.message });
+        }
+    }
+
+    handleVerifySwitch = async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            await this.verifySwitchUC.execute(id);
+
+            return res.status(200).json({
+                message: "Game verified/unverified successfully"
+            });
+        } catch (err) {
+            const statusCode = err.message == "Game not found" ? 404 : 500;
+
+            return res.status(statusCode).json({
+                error: err.message
+            });
         }
     }
 }
