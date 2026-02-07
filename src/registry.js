@@ -1,6 +1,6 @@
 // import Repositories
-import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepository";
-import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepository";
+import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepository.js";
+import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepository.js";
 import { CompanyRepository } from "./infrastructure/mongoose/repositories/CompanyRepository.js";
 
 // import Game Use Cases
@@ -11,7 +11,7 @@ import { GetAllGamesUseCase } from "./usecases/game/GetAll.js";
 import { GetAllVerifiedGamesUseCase } from "./usecases/game/GetAllVerified.js";
 import { GetByIdGameUseCase } from "./usecases/game/GetById.js";
 import { GetUserLibraryWithDetailsUseCase } from "./usecases/game/GetUserLibraryWithDetails.js";
-import { GetByUserIdGameUseCase } from "./usecases/game/GetByUserId";
+import { GetByUserIdGameUseCase } from "./usecases/game/GetByUserId.js";
 
 // import User Use Cases
 import { RegisterUserUseCase } from "./usecases/user/RegisterUser.js";
@@ -32,8 +32,8 @@ import { VerifyCompanyUseCase } from "./usecases/company/VerifyCompany.js";
 
 
 // import Controllers
-import { GameController } from "./web/controllers/GameController";
-import { UserController } from "./web/controllers/UserController";
+import { GameController } from "./web/controllers/GameController.js";
+import { UserController } from "./web/controllers/UserController.js";
 import { CompanyController } from "./web/controllers/CompanyController.js";
 
 
