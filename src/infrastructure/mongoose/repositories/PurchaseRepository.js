@@ -1,8 +1,8 @@
-import { Purchase } from "../models/PurchaseModel.js";
+import { PurchaseModel } from "../models/PurchaseModel.js";
 
 export class PurchaseRepository {
     constructor() {
-        this.model = Purchase;
+        this.model = PurchaseModel;
     }
 
     async create(purchaseData) {

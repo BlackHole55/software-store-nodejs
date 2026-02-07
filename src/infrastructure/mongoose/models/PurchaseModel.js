@@ -56,4 +56,4 @@ const PurchaseSchema = new Schema(
     }
 );
 
-export const Purchase = mongoose.model('Purchase', PurchaseSchema, 'purchases');
+export const PurchaseModel = mongoose.model('Purchase', PurchaseSchema, 'purchases');
