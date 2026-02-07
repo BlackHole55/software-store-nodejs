@@ -42,8 +42,6 @@ import { GameController } from "./web/controllers/GameController.js";
 import { UserController } from "./web/controllers/UserController.js";
 import { CompanyController } from "./web/controllers/CompanyController.js";
 import { PurchaseController } from "./web/controllers/PurchaseController.js";
-import { Purchase } from "./infrastructure/mongoose/models/PurchaseModel.js";
-
 
 export const initRegistry = async () => {
     // Initialize Repositories
