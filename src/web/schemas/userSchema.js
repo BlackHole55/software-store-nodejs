@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const userSchema = z.object({
+export const createUserSchema = z.object({
     username: z.string(),
     email: z.string(),
     password: z.string().min(6, "Password must be at least 6 characters"),
@@ -12,10 +12,6 @@ export const userSchema = z.object({
           playtime_hours: z.number().min(0).default(0)
         })
       ).optional()
-});
-
-export const paramsIdSchema = z.object({
-    id: z.string().regex(/^[0-9a-fA-F]{24}$/, "Неверный формат ID")
 });
 
 export const updateUserSchema = z.object({
