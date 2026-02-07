@@ -23,7 +23,8 @@ export const gameRouter = (controller) => {
     // Admin routes
     const admin = Router();
     admin.use(roleMiddleware("admin"));
-    admin.get('/', authMiddleware, controller.handleGetAll);
+    admin.get('/', controller.handleGetAll);
+    admin.patch('/:id/verify', controller.handleVerifySwitch)
 
     auth.use('/admin', admin);
     router.use('/', auth);
