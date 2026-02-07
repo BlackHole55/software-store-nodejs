@@ -2,10 +2,7 @@ import { Router } from "express";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 import { validate } from "../middlewares/validate.js";
-import { 
-    createCompanySchema, 
-    updateCompanySchema 
-} from "../schemas/companySchema.js";
+import { createCompanySchema, updateCompanySchema } from "../schemas/companySchema.js";
 
 export const companyRouter = (controller) => {
     const router = Router();

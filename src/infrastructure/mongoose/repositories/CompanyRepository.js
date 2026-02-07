@@ -2,7 +2,7 @@
     import { CompanyModel } from "../models/CompanyModel.js";
 
 
-    export class CompanyRepository {
+export class CompanyRepository {
     async create(company) {
         const companyData = {
             ...company
@@ -100,24 +100,24 @@
             }
         }
     
-        async unverify(id){
-            if (!mongoose.Types.ObjectId.isValid(id)) {
-                throw new Error("Invalid ID format");
-            }
-    
-            const result = await CompanyModel.findByIdAndUpdate(
-                id,
-                {
-                    $set: {
-                        isVerified: false,
-                        updatedAt: new Date()
-                    }
-                },
-                { runValidators: true }
-            );
-    
-            if (!result) {
-                throw new Error("Not Found");
-            }
+    async unverify(id){
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("Invalid ID format");
         }
+
+        const result = await CompanyModel.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    isVerified: false,
+                    updatedAt: new Date()
+                }
+            },
+            { runValidators: true }
+        );
+
+        if (!result) {
+            throw new Error("Not Found");
+        }
+    }
 }
