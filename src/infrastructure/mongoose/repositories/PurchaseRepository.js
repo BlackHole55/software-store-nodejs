@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import { Purchase } from "../models/PurchaseModel";
+import { Purchase } from "../models/PurchaseModel.js";
 
 export class PurchaseRepository {
     constructor() {
