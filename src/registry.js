@@ -3,6 +3,7 @@ import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepos
 import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepository.js";
 import { CompanyRepository } from "./infrastructure/mongoose/repositories/CompanyRepository.js";
 import { PurchaseRepository } from "./infrastructure/mongoose/repositories/PurchaseRepository.js";
+import { ReviewRepository } from "./infrastructure/mongoose/repositories/ReviewRepository.js";
 
 // import Game Use Cases
 import { CreateGameUseCase } from "./usecases/game/CreateGame.js";
@@ -44,12 +45,21 @@ import { GetAllPurchaseUseCase } from "./usecases/purchase/GetAll.js";
 import { GetByIdPurchaseUseCase } from "./usecases/purchase/GetById.js";
 import { DeletePurchaseUseCase } from "./usecases/purchase/Delete.js";
 
+// import Review Use Cases
+import { CreateReviewUC } from "./usecases/review/Create.js";
+import { UpdateReviewUC } from "./usecases/review/Update.js";
+import { DeleteReviewUC } from "./usecases/review/Delete.js";
+import { GetAllReviewUC } from "./usecases/review/GetAll.js";
+import { GetByIdReviewUC } from "./usecases/review/GetById.js";
+import { GetByGameIdReviewUC } from "./usecases/review/GetByGameId.js";
+
 // import Controllers
 import { GameController } from "./web/controllers/GameController.js";
 import { UserController } from "./web/controllers/UserController.js";
 import { CompanyController } from "./web/controllers/CompanyController.js";
 import { EmulationController } from "./web/controllers/EmulationController.js";
 import { PurchaseController } from "./web/controllers/PurchaseController.js";
+import { ReviewController } from "./web/controllers/ReviewController.js";
 
 export const initRegistry = async () => {
     // Initialize Repositories
@@ -58,6 +68,7 @@ export const initRegistry = async () => {
     const companyRepo = new CompanyRepository();
     const emulationRepo = new EmulationRepository();
     const purchaseRepo = new PurchaseRepository();
+    const reviewRepo = new ReviewRepository();
 
     // Initialize Game Use Cases
     const createGameUC = new CreateGameUseCase(gameRepo);
@@ -99,6 +110,14 @@ export const initRegistry = async () => {
     const getByIdPurchaseUC = new GetByIdPurchaseUseCase(purchaseRepo);
     const deletePurchaseUC = new DeletePurchaseUseCase(purchaseRepo);
 
+    // Initialize Purchase Use Cases
+    const createReviewUC = new CreateReviewUC(reviewRepo, userRepo);
+    const updateReviewUC = new UpdateReviewUC(reviewRepo);
+    const deleteReviewUC = new DeleteReviewUC(reviewRepo);
+    const getAllReviewUC = new GetAllReviewUC(reviewRepo);
+    const getByIdReviewUC = new GetByIdReviewUC(reviewRepo);
+    const getByGameIdReviewUC = new GetByGameIdReviewUC(reviewRepo, gameRepo);
+
     // Initialize Controllers
     const gameController = new GameController({
         createGameUC: createGameUC, 
@@ -138,8 +157,21 @@ export const initRegistry = async () => {
         updateEmulationUseCase,
         deleteEmulationUC
     });
-    const purchaseController = new PurchaseController({
 
+    const purchaseController = new PurchaseController({
+        createPurchaseUC: createPurchaseUC,
+        getAllPurchaseUC: getAllPurchaseUC,
+        getByIdPurchaseUC: getByIdPurchaseUC,
+        deletePurchaseUC: deletePurchaseUC
+    })
+
+    const reviewController = new ReviewController({
+        createReviewUC: createReviewUC,
+        updateReviewUC: updateReviewUC,
+        deleteReviewUC: deleteReviewUC,
+        getAllReviewUC: getAllReviewUC,
+        getByIdReviewUC: getByIdReviewUC,
+        getByGameIdReviewUC: getByGameIdReviewUC
     })
 
     return {
@@ -147,6 +179,7 @@ export const initRegistry = async () => {
         userController,
         companyController,
         emulationController,
-        purchaseController
+        purchaseController,
+        reviewController
     }
 }
