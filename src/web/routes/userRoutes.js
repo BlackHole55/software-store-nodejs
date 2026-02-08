@@ -12,16 +12,20 @@ export const userRouter = (controller) => {
 
     const auth = Router();
     auth.use(authMiddleware);
+
     auth.get("/profile", controller.handleGetProfile);
-    auth.get("/:id", controller.handleGetById);
-    auth.put('/:id',validate( updateUserSchema),controller.handleUpdate);
 
     const admin = Router();
     admin.use(roleMiddleware("admin"));
-    admin.get("/getAll", controller.handleGetAll);
+    
+    admin.get("/all", controller.handleGetAll); 
     admin.delete("/:id", controller.handleDelete);
 
-    auth.use("/admin", admin); 
+    auth.use("/admin", admin);
+
+    auth.get("/:id", controller.handleGetById);
+    auth.put('/:id', validate(updateUserSchema), controller.handleUpdate);
+
     router.use("/", auth);
 
     return router;

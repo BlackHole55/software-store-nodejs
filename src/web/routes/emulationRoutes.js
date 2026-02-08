@@ -7,18 +7,14 @@ import { createEmulationSchema, updateEmulationSchema } from "../schemas/emulati
 export const emulationRouter = (controller) => {
     const router = Router();
 
-    // Public routes
     router.get('/', controller.handleGetAll);
-    router.get('/:id', controller.handleGetById);
 
-    // User routes
     const auth = Router();
     auth.use(authMiddleware);
 
     auth.post('/', validate(createEmulationSchema), controller.handleCreate); 
-    auth.put('/:id',validate(updateEmulationSchema), controller.handleUpdate);
+    auth.put('/:id', validate(updateEmulationSchema), controller.handleUpdate);
 
-    // Admin routes
     const admin = Router();
     admin.use(roleMiddleware('admin'));
     
@@ -26,6 +22,8 @@ export const emulationRouter = (controller) => {
 
     auth.use("/admin", admin); 
     router.use("/", auth);
+    
+    router.get('/:id', controller.handleGetById);
 
     return router;
 };
