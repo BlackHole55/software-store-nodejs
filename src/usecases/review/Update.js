@@ -1,6 +1,6 @@
 export class UpdateReviewUC {
-    constructor(reviwRepo) {
-        this.reviwRepo = reviwRepo;
+    constructor(reviewRepo) {
+        this.reviewRepo = reviewRepo;
     }
 
     async execute(id, userId, updateData) {
@@ -16,6 +16,6 @@ export class UpdateReviewUC {
             content: updateData.content ?? existingReview.content
         };
 
-        return await this.reviwRepo.update(id, finalUpdate);
+        return await this.reviewRepo.update(id, finalUpdate);
     }
 }
