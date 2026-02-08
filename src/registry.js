@@ -31,6 +31,13 @@ import { DeleteCompanyUseCase } from "./usecases/company/Delete.js";
 import { GetAllVerifiedCompaniesUseCase } from "./usecases/company/GetAllVerified.js";
 import { VerifyCompanyUseCase } from "./usecases/company/VerifyCompany.js";
 
+// import Emulation Use Cases
+import { CreateEmulationUseCase } from "./usecases/emulation/CreateEmulation.js";
+import { GetAllEmulationsUseCase } from "./usecases/emulation/GetAll.js";
+import { GetByIdEmulationUseCase } from "./usecases/emulation/GetById.js";
+import { UpdateEmulationUseCase } from "./usecases/emulation/Update.js";
+import { DeleteEmulationUseCase } from "./usecases/emulation/Delete.js";
+
 // import Purchase Use Cases
 import { CreatePurchaseUseCase } from "./usecases/purchase/Create.js";
 import { GetAllPurchaseUseCase } from "./usecases/purchase/GetAll.js";
@@ -41,6 +48,7 @@ import { DeletePurchaseUseCase } from "./usecases/purchase/Delete.js";
 import { GameController } from "./web/controllers/GameController.js";
 import { UserController } from "./web/controllers/UserController.js";
 import { CompanyController } from "./web/controllers/CompanyController.js";
+import { EmulationController } from "./web/controllers/EmulationController.js";
 import { PurchaseController } from "./web/controllers/PurchaseController.js";
 
 export const initRegistry = async () => {
@@ -48,6 +56,7 @@ export const initRegistry = async () => {
     const gameRepo = new GameRepository();
     const userRepo = new UserRepository();
     const companyRepo = new CompanyRepository();
+    const emulationRepo = new EmulationRepository();
     const purchaseRepo = new PurchaseRepository();
 
     // Initialize Game Use Cases
@@ -76,6 +85,13 @@ export const initRegistry = async () => {
     const deleteCompanyUC = new DeleteCompanyUseCase(companyRepo);
     const getAllVerifiedCompaniesUC = new GetAllVerifiedCompaniesUseCase(companyRepo);
     const verifyCompanyUC = new VerifyCompanyUseCase(companyRepo);
+
+    // Initialize Emulation Use Cases
+    const createEmulationUC = new CreateEmulationUseCase(emulationRepo);
+    const getAllEmulationsUC = new GetAllEmulationsUseCase(emulationRepo);
+    const getByIdEmulationUC = new GetByIdEmulationUseCase(emulationRepo)
+    const updateEmulationUseCase = new UpdateEmulationUseCase(emulationRepo);
+    const deleteEmulationUC = new DeleteEmulationUseCase(emulationRepo);
 
     // Initialize Purchase Use Cases
     const createPurchaseUC = new CreatePurchaseUseCase(purchaseRepo, userRepo);
@@ -114,6 +130,14 @@ export const initRegistry = async () => {
         verifyCompanyUC: verifyCompanyUC
     });
 
+
+    const emulationController = new EmulationController({
+        createEmulationUC,
+        getAllEmulationsUC,
+        getByIdEmulationUC,
+        updateEmulationUseCase,
+        deleteEmulationUC
+    });
     const purchaseController = new PurchaseController({
 
     })
@@ -122,6 +146,7 @@ export const initRegistry = async () => {
         gameController,
         userController,
         companyController,
+        emulationController,
         purchaseController
     }
 }
