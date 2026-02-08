@@ -2,7 +2,9 @@
 ### How to run project
 ```
 npm install
+
 cd cmd/boostore
+
 npm run dev
 
 ```
