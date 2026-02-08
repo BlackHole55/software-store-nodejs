@@ -7,6 +7,10 @@ import { createCompanySchema, updateCompanySchema } from "../schemas/companySche
 export const companyRouter = (controller) => {
     const router = Router();
 
+    // PUBLIC
+    router.get('/:id', controller.handleGetById);
+    router.get('/', controller.handleGetAll);
+
     // PROTECTED ROUTER 
     const auth = Router();
     auth.use(authMiddleware);
@@ -25,14 +29,8 @@ export const companyRouter = (controller) => {
     auth.post('/', validate(createCompanySchema), controller.handleCreate);
     auth.put('/:id', validate(updateCompanySchema), controller.handleUpdate);
     auth.delete('/:id', controller.handleDelete);
-    
-    // PUBLIC: Get all companies 
-    router.get('/', controller.handleGetAll);
 
     router.use("/", auth);
-
-    // PUBLIC: Get company by ID
-    router.get('/:id', controller.handleGetById);
 
     return router;
 };
