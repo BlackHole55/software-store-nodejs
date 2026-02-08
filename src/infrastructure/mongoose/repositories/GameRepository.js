@@ -72,7 +72,7 @@ export class GameRepository {
             throw new Error("Invalid User ID format");
         }
 
-        const games = await GameModel.find({ userId: userId }).lean();
+        const games = await GameModel.find({ user_id: userId }).lean();
 
         return games.map(game => ({
             ...game,
