@@ -9,7 +9,8 @@ export class GameController {
         getUserLibraryWithDetailsUC, 
         getByUserIdGameUC,
         verifySwitchUC,
-        getGameStatsUC
+        getGameStatsUC,
+        searchByTitleGameUC
     }) {
         this.createGameUC = createGameUC,
         this.updateGameUC = updateGameUC,
@@ -20,7 +21,8 @@ export class GameController {
         this.getUserLibraryWithDetailsUC = getUserLibraryWithDetailsUC,
         this.getByUserIdGameUC = getByUserIdGameUC,
         this.verifySwitchUC = verifySwitchUC,
-        this.getGameStatsUC = getGameStatsUC
+        this.getGameStatsUC = getGameStatsUC,
+        this.searchByTitleGameUC = searchByTitleGameUC
     }
 
     handleCreate = async (req, res) => {
@@ -145,7 +147,17 @@ export class GameController {
 
             return res.status(200).json(stats);
         } catch (err) {
-            console.error("Stats Error:", err);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+
+    handleSearchByTitle = async (req, res) => {
+        try {
+            const { q } = req.query
+            const games = await this.searchByTitleGameUC.execute(q);
+
+            return res.status(200).json(games);
+        } catch (err) {
             return res.status(500).json({ error: "Internal Server Error" });
         }
     }

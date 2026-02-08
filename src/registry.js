@@ -17,6 +17,7 @@ import { GetUserLibraryWithDetailsUseCase } from "./usecases/game/GetUserLibrary
 import { GetByUserIdGameUseCase } from "./usecases/game/GetByUserId.js";
 import { VerifySwitchUseCase } from "./usecases/game/VerifySwitch.js";
 import { GetGameStatsUseCase } from "./usecases/game/GetStats.js";
+import { SearchByTitleGameUseCase } from "./usecases/game/SearchByTitle.js";
 
 // import User Use Cases
 import { RegisterUserUseCase } from "./usecases/user/RegisterUser.js";
@@ -84,6 +85,7 @@ export const initRegistry = async () => {
     const getByUserIdGameUC = new GetByUserIdGameUseCase(gameRepo);
     const verifySwitchUC = new VerifySwitchUseCase(gameRepo);
     const getGameStatsUC = new GetGameStatsUseCase(gameRepo);
+    const searchByTitleGameUC = new SearchByTitleGameUseCase(gameRepo);
 
     // Initialize User Use Cases
     const registerUserUC = new RegisterUserUseCase(userRepo);
@@ -134,7 +136,8 @@ export const initRegistry = async () => {
         getUserLibraryWithDetailsUC: getUserLibraryWithDetailsUC, 
         getByUserIdGameUC: getByUserIdGameUC,
         verifySwitchUC: verifySwitchUC,
-        getGameStatsUC: getGameStatsUC
+        getGameStatsUC: getGameStatsUC,
+        searchByTitleGameUC: searchByTitleGameUC
     });
 
     const userController = new UserController({
