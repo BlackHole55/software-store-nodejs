@@ -61,4 +61,25 @@ const GameSchema = new Schema(
     }
 )
 
+GameSchema.virtual('publisher', {
+    ref: 'Company',
+    localField: 'publisher_id',
+    foreignField: '_id',
+    justOne: true
+});
+
+GameSchema.virtual('developer', {
+    ref: 'Company',
+    localField: 'developer_id',
+    foreignField: '_id',
+    justOne: true
+});
+
+GameSchema.virtual('emulation', {
+    ref: 'Emulation',
+    localField: 'emulation_id',
+    foreignField: '_id',
+    justOne: true
+});
+
 export const GameModel = mongoose.model('Game', GameSchema, 'games');
