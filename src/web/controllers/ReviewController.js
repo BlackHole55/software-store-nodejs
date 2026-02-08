@@ -22,7 +22,7 @@ export class ReviewController {
                 user_id: req.user.id
             };
 
-            await this.reviewUC.create(reviewData);
+            await this.createReviewUC.execute(reviewData);
             return res.status(201).json({ message: "Review submitted" });
         } catch (err) {
             const status = err.message.includes("denied") ? 403 : 500;
@@ -32,7 +32,7 @@ export class ReviewController {
 
     handleGetAll = async (req, res) => {
         try {
-            const reviews = await this.reviewUC.getAll();
+            const reviews = await this.getAllReviewUC.execute();
             return res.status(200).json(reviews);
         } catch (err) {
             return res.status(500).json({ error: err.message });
@@ -41,7 +41,7 @@ export class ReviewController {
 
     handleGetById = async (req, res) => {
         try {
-            const review = await this.reviewUC.getById(req.params.id);
+            const review = await this.getByIdReviewUC.execute(req.params.id);
             return res.status(200).json(review);
         } catch (err) {
             const status = err.message === "Review not found" ? 404 : 500;
@@ -51,7 +51,7 @@ export class ReviewController {
 
     handleGetByGameId = async (req, res) => {
         try {
-            const reviews = await this.reviewUC.getByGameId(req.params.id);
+            const reviews = await this.getByGameIdReviewUC.execute(req.params.id);
             return res.status(200).json(reviews);
         } catch (err) {
             const status = err.message === "Game not found" ? 404 : 500;
@@ -64,7 +64,7 @@ export class ReviewController {
             const { id } = req.params;
             const currentUserId = req.user.id;
             
-            await this.reviewUC.update(id, currentUserId, req.body);
+            await this.updateReviewUC.execute(id, currentUserId, req.body);
             return res.status(200).json({ message: "Review updated successfully" });
         } catch (err) {
             const status = err.message === "Review not found" ? 404 : 500;
@@ -78,7 +78,7 @@ export class ReviewController {
             const userId = req.user.id;
             const userRole = req.user.role || "user";
 
-            await this.reviewUC.delete(id, userId, userRole);
+            await this.deleteReviewUC.execute(id, userId, userRole);
             return res.status(200).json({ message: "Review deleted successfully" });
         } catch (err) {
             const status = err.message === "Review not found" ? 404 : 403;
