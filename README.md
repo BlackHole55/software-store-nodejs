@@ -37,6 +37,8 @@ GET /games Returns a collection of all verified game listings. This endpoint is 
 
 GET /games/:id Provides comprehensive details for a specific game, including embedded publisher, developer, and emulation information.
 
+GET /games/search: Provides search among verified games
+
 GET /companies Retrieves a list of all companies (Publishers and Developers) registered on the platform.
 
 GET /companies/verified Critical Route: An optimized endpoint that returns only verified companies to populate frontend selection menus for game creation.
