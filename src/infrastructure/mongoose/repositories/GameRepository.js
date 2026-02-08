@@ -38,7 +38,11 @@ export class GameRepository {
             throw new Error("Invalid ID format");
         }
 
-        const game = await GameModel.findById(id).lean(); 
+        const game = await GameModel.findById(id)
+        .populate("publisher", "name")
+        .populate("developer", "name")
+        .populate("emulation")
+        .lean(); 
 
         if (!game) return null;
 
