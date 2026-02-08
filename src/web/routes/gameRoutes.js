@@ -6,28 +6,27 @@ import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 
 export const gameRouter = (controller) => {
     const router = Router();
-
-    // Public routes
-    router.get('/', controller.handleGetAllVerified);
-    router.get('/:id', controller.handleGetById);
-
-    // Aunthenticated users routes
     const auth = Router();
+
     auth.use(authMiddleware);
 
-    auth.get('/my-library', controller.handleGetUserLibraryWithDetails); // untested
+    auth.get('/my-library', controller.handleGetUserLibraryWithDetails);
+
+    const admin = Router();
+    admin.use(roleMiddleware("admin"));
+    admin.get('/', controller.handleGetAll);
+    admin.patch('/:id/verify', controller.handleVerifySwitch);
+    auth.use('/admin', admin);
+
     auth.post('/', validate(createGameSchema), controller.handleCreate);
     auth.put('/:id', validate(updateGameSchema), controller.handleUpdate);
     auth.delete('/:id', controller.handleDelete);
 
-    // Admin routes
-    const admin = Router();
-    admin.use(roleMiddleware("admin"));
-    admin.get('/', controller.handleGetAll);
-    admin.patch('/:id/verify', controller.handleVerifySwitch)
+    router.get('/', controller.handleGetAllVerified);
 
-    auth.use('/admin', admin);
     router.use('/', auth);
+
+    router.get('/:id', controller.handleGetById);
 
     return router;
 }
