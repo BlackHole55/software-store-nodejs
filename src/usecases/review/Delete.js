@@ -1,6 +1,6 @@
 export class DeleteReviewUC {
-    constructor(reviwRepo) {
-        this.reviwRepo = reviwRepo;
+    constructor(reviewRepo) {
+        this.reviewRepo = reviewRepo;
     }
 
     async execute(id, userId, userRole) {
@@ -11,6 +11,6 @@ export class DeleteReviewUC {
             throw new Error("Permission denied: you can only delete your own reviews");
         }
 
-        return await this.reviwRepo.delete(id);
+        return await this.reviewRepo.delete(id);
     }
 }
