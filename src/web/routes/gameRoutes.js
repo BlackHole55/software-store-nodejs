@@ -14,12 +14,11 @@ export const gameRouter = (controller) => {
     // PUBLIC
     router.get('/', controller.handleGetAllVerified);
 
-    router.patch('/:id/verify', authMiddleware, roleMiddleware("admin"), controller.handleVerifySwitch);
-
-    router.get('/:id', controller.handleGetById);
-
     // PRIVATE - Admin
     router.patch('/:id/verify', authMiddleware, roleMiddleware("admin"), controller.handleVerifySwitch);
+
+    // PUBLIC
+    router.get('/:id', controller.handleGetById);
 
     // PRIVATE - Actions
     router.post('/', authMiddleware, validate(createGameSchema), controller.handleCreate);

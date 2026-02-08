@@ -72,7 +72,7 @@ export class CompanyController {
             const companyData = req.body
             const userRole = req.user.role
 
-            await this.updateGameUC.execute(id, companyData, userRole)
+            await this.updateCompanyUC.execute(id, companyData, userRole)
 
             return res.status(200).json({ message: "Game updated"})
 
