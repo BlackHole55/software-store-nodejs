@@ -9,6 +9,7 @@ export const gameRouter = (controller) => {
     
     // PUBLIC STATIC
     router.get('/', controller.handleGetAllVerified);
+    router.get('/search', controller.handleSearchByTitle);
 
     // PRIVATE STATIC
     router.get('/my-library', authMiddleware, controller.handleGetUserLibraryWithDetails);
