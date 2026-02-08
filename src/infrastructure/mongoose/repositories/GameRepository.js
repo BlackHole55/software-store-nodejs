@@ -25,8 +25,8 @@ export class GameRepository {
     }
 
     async getAllVerified() {
-        const verifiedGames = await GameModel.find({ isVerified: true }).lean();
-        
+        const verifiedGames = await GameModel.find({ is_verified: true }).lean();
+
         return verifiedGames.map(game => ({
             ...game,
             id: game._id.toString(),
