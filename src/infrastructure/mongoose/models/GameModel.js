@@ -14,7 +14,9 @@ const GameSchema = new Schema(
         },
         emulation_id: { 
             type: Schema.Types.ObjectId, 
-            ref: 'Emulation' 
+            ref: 'Emulation',
+            required: false,
+            set: v => v === '' ? undefined : v
         },
         user_id: {
             type: Schema.Types.ObjectId,
