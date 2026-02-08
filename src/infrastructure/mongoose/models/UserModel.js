@@ -26,9 +26,10 @@ const UserSchema = new Schema(
     },
     library: [
       {
-        game_id: { type: Schema.Types.ObjectId, ref: 'Game' },
+        game_id: { type: Schema.Types.ObjectId, ref: 'Game', index: true },
         added_at: { type: Date, default: Date.now },
-        playtime_hours: { type: Number, default: 0 }
+        playtime_hours: { type: Number, default: 0 },
+        _id: false
       }
     ]},
     { 
