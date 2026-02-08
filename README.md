@@ -120,6 +120,8 @@ JWT_SECRET=[YOUR_SECRET]
 
 Backend: https://github.com/BlackHole55/software-store-nodejs
 
+Railway deployed: https://software-store-fronend-fork-production.up.railway.app/
+
 ### Example
 Main page
 ![](./readme_img/store_page.png)
