@@ -17,8 +17,11 @@ npm run dev
 ### Technology stack
 
 **Frontend**: Next.js (React)
+
 **Backend**: NodeJs (Express)
+
 **Database**: MongoDB
+
 **Other**: REST API
 
 ### API Documentaion
