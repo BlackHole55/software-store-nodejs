@@ -6,6 +6,7 @@ import { gameRouter } from "./web/routes/gameRoutes.js";
 import { userRouter } from "./web/routes/userRoutes.js";
 import { companyRouter } from "./web/routes/companyRoutes.js";
 import { purchaseRouter } from "./web/routes/purchaseRoutes.js";
+import { reviewRouter } from "./web/routes/reviewRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -15,11 +16,13 @@ app.use((req, res, next) => {
   next();
 });
 
-const { gameController, userController, companyController, purchaseController } = await initRegistry();
+const { gameController, userController, companyController, purchaseController, reviewController } = await initRegistry();
 
 // Routes
 app.use('/api/v1/games', gameRouter(gameController));
 app.use('/api/v1/users', userRouter(userController));
 app.use('/api/v1/companies', companyRouter(companyController));
 app.use('/api/v1/purchases', purchaseRouter(purchaseController));
+app.use('/api/v1/reviews', reviewRouter(reviewController));
+
 export default app;
