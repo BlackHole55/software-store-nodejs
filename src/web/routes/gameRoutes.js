@@ -7,15 +7,18 @@ import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 export const gameRouter = (controller) => {
     const router = Router();
     
-    // PUBLIC
-    router.get('/', controller.handleGetAllVerified);
-    router.get('/:id', controller.handleGetById);
-
     // PRIVATE - Specific
     router.get('/my-library', authMiddleware, controller.handleGetUserLibraryWithDetails);
+    router.get('/admin', authMiddleware, roleMiddleware("admin"), controller.handleGetAll);
+
+    // PUBLIC
+    router.get('/', controller.handleGetAllVerified);
+
+    router.patch('/:id/verify', authMiddleware, roleMiddleware("admin"), controller.handleVerifySwitch);
+
+    router.get('/:id', controller.handleGetById);
 
     // PRIVATE - Admin
-    router.get('/admin', authMiddleware, roleMiddleware("admin"), controller.handleGetAll);
     router.patch('/:id/verify', authMiddleware, roleMiddleware("admin"), controller.handleVerifySwitch);
 
     // PRIVATE - Actions
