@@ -8,15 +8,13 @@ export const companyRouter = (controller) => {
     const router = Router();
 
     // PUBLIC
+    router.get('/verified', controller.handleGetAllVerified);
     router.get('/:id', controller.handleGetById);
     router.get('/', controller.handleGetAll);
 
     // PROTECTED ROUTER 
     const auth = Router();
     auth.use(authMiddleware);
-
-    // Verified companies list (for authenticated users)
-    auth.get('/verified', controller.handleGetAllVerified);
 
     // ADMIN ROUTES
     const admin = Router();
