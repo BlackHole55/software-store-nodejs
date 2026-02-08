@@ -17,7 +17,7 @@ export const companyRouter = (controller) => {
     // ADMIN ROUTES
     const admin = Router();
     admin.use(roleMiddleware('admin'));
-    admin.put('/:id/verify', controller.handleVerifySwitch);
+    admin.patch('/:id/verify', controller.handleVerifySwitch);
 
     auth.use("/admin", admin); 
 

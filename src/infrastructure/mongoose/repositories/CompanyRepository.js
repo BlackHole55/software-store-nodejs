@@ -29,7 +29,7 @@ export class CompanyRepository {
         }))
     }
 
-    async getById() {
+    async getById(id) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
@@ -88,7 +88,7 @@ export class CompanyRepository {
                 id,
                 {
                     $set: {
-                        isVerified: true,
+                        is_verified: true,
                         updatedAt: new Date()
                     }
                 },
@@ -109,7 +109,7 @@ export class CompanyRepository {
             id,
             {
                 $set: {
-                    isVerified: false,
+                    is_verified: false,
                     updatedAt: new Date()
                 }
             },

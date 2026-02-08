@@ -18,8 +18,6 @@ export const gameRouter = (controller) => {
     // PUBLIC
     router.get('/', controller.handleGetAllVerified);
 
-    router.patch('/:id/verify', authMiddleware, roleMiddleware("admin"), controller.handleVerifySwitch);
-
     router.get('/:id', controller.handleGetById);
 
     // ADMIN STATIC

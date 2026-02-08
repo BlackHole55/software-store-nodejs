@@ -117,7 +117,7 @@ export class GameRepository {
             id,
             {
                 $set: {
-                    isVerified: true,
+                    is_verified: true,
                     updatedAt: new Date()
                 }
             },
@@ -138,7 +138,7 @@ export class GameRepository {
             id,
             {
                 $set: {
-                    isVerified: false,
+                    is_verified: false,
                     updatedAt: new Date()
                 }
             },
@@ -154,7 +154,7 @@ export class GameRepository {
         const titleRegex = new RegExp(title, 'i');
 
         const games = await GameModel.find({
-            isVerified: true,
+            is_verified: true,
             title: titleRegex
         }).lean();
 
