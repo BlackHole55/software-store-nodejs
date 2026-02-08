@@ -163,4 +163,42 @@ export class GameRepository {
             id: game._id.toString(),
         }));
     }
+
+    async getStats() {
+        try {
+            const stats = await GameModel.aggregate([
+                {
+                    $group: {
+                        _id: null, 
+                        total_games: { $sum: 1 },
+                        total_price: { $sum: "$price" }, 
+                        avg_price: { $sum: { $avg: "$price" } }, 
+                        min_price: { $min: "$price" },
+                        max_price: { $max: "$price" }
+                    }
+                }
+            ]);
+
+            if (!stats || stats.length === 0) {
+                return {
+                    total_games: 0,
+                    total_price: 0,
+                    avg_price: 0,
+                    min_price: 0,
+                    max_price: 0
+                };
+            }
+
+            const res = stats[0];
+            
+            return {
+                total_games: res.total_games,
+                avg_price: Number(res.avg_price.toFixed(2)), 
+                min_price: res.min_price,
+                max_price: res.max_price
+            };
+        } catch (err) {
+            throw new Error("Failed to fetch game stats: " + err.message);
+        }
+    }
 }
