@@ -4,7 +4,7 @@ import { validate } from "../middlewares/validate.js";
 import { createPurchaseSchema } from "../schemas/purchaseSchema.js";
 import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 
-export const gameRouter = (controller) => {
+export const purchaseRouter = (controller) => {
     const router = Router();
     router.use(authMiddleware);
 
