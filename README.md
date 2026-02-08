@@ -111,6 +111,12 @@ MONGODB_CONNECT_URL=[YOUR_URI]
 
 JWT_SECRET=[YOUR_SECRET]
 
+### Github links
+
+Backend: https://github.com/BlackHole55/software-store-nodejs
+
+Frontend: https://github.com/Animantra/software-store-fronend-fork
+
 ### Example
 Main page
 ![](./readme_img/store_page.png)
