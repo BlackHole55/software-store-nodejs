@@ -3,6 +3,7 @@ import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepos
 import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepository.js";
 import { CompanyRepository } from "./infrastructure/mongoose/repositories/CompanyRepository.js";
 import { PurchaseRepository } from "./infrastructure/mongoose/repositories/PurchaseRepository.js";
+import { EmulationRepository } from "./infrastructure/mongoose/repositories/EmulationRepository.js";
 
 // import Game Use Cases
 import { CreateGameUseCase } from "./usecases/game/CreateGame.js";

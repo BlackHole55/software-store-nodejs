@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { EmualtionModel } from "../models/EmulationModel";
+import { EmualtionModel } from "../models/EmulationModel.js";
 
 export class EmulationRepository {
     async create(emulation) {
@@ -11,16 +11,15 @@ export class EmulationRepository {
     }
 
     async getAll() {
-        const emulations = await EmualtionModel.find({}).lean();
+        const emulations = await EmulationModel.find({}).lean();
 
         return emulations.map(emulation => ({
             ...emulation,
-            id: emulation._id.toString(),
+            id: emulation._id.toString()
         }));
     }
-
    
-    async getById() {
+    async getById(id) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid ID format");
         }
