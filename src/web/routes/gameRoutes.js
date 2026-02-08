@@ -6,27 +6,22 @@ import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 
 export const gameRouter = (controller) => {
     const router = Router();
-    const auth = Router();
-
-    auth.use(authMiddleware);
-
-    auth.get('/my-library', controller.handleGetUserLibraryWithDetails);
-
-    const admin = Router();
-    admin.use(roleMiddleware("admin"));
-    admin.get('/', controller.handleGetAll);
-    admin.patch('/:id/verify', controller.handleVerifySwitch);
-    auth.use('/admin', admin);
-
-    auth.post('/', validate(createGameSchema), controller.handleCreate);
-    auth.put('/:id', validate(updateGameSchema), controller.handleUpdate);
-    auth.delete('/:id', controller.handleDelete);
-
+    
+    // PUBLIC
     router.get('/', controller.handleGetAllVerified);
-
-    router.use('/', auth);
-
     router.get('/:id', controller.handleGetById);
+
+    // PRIVATE - Specific
+    router.get('/my-library', authMiddleware, controller.handleGetUserLibraryWithDetails);
+
+    // PRIVATE - Admin
+    router.get('/admin', authMiddleware, roleMiddleware("admin"), controller.handleGetAll);
+    router.patch('/:id/verify', authMiddleware, roleMiddleware("admin"), controller.handleVerifySwitch);
+
+    // PRIVATE - Actions
+    router.post('/', authMiddleware, validate(createGameSchema), controller.handleCreate);
+    router.put('/:id', authMiddleware, validate(updateGameSchema), controller.handleUpdate);
+    router.delete('/:id', authMiddleware, controller.handleDelete);
 
     return router;
 }
