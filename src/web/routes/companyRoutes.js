@@ -6,25 +6,26 @@ import { createCompanySchema, updateCompanySchema } from "../schemas/companySche
 
 export const companyRouter = (controller) => {
     const router = Router();
-
-    router.get('/', controller.handleGetAll);
-    router.get('/:id', controller.handleGetById);
-
     const auth = Router();
-    auth.use(authMiddleware);
 
+    auth.use(authMiddleware);
     auth.get('/verified', controller.handleGetAllVerified);
+
+    const admin = Router();
+    admin.use(roleMiddleware('admin'));
+    admin.put('/:id/verify', controller.handleVerifySwitch);
+
+    auth.use("/admin", admin); 
+
     auth.post('/', validate(createCompanySchema), controller.handleCreate);
     auth.put('/:id', validate(updateCompanySchema), controller.handleUpdate);
     auth.delete('/:id', controller.handleDelete);
 
-    const admin = Router();
-    admin.use(roleMiddleware('admin'));
+    router.get('/', controller.handleGetAll);
 
-    admin.put('/:id/verify', controller.handleVerifySwitch);
-
-    auth.use("/admin", admin); 
     router.use("/", auth);
+
+    router.get('/:id', controller.handleGetById);
 
     return router;
 };
