@@ -1,16 +1,16 @@
-import mongoose, { Schema, Document, SchemaType } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const GameSchema = new Schema(
     {
         publisher_id: {
             type: Schema.Types.ObjectId,
             required: [true, 'Publisher ID is required'],
-            ref: 'Publisher'
+            ref: 'Company'
         },
         developer_id: { 
             type: Schema.Types.ObjectId, 
             required: [true, 'Developer ID is required'], 
-            ref: 'Developer'
+            ref: 'Company'
         },
         emulation_id: { 
             type: Schema.Types.ObjectId, 
