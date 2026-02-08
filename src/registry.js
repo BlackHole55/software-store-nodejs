@@ -2,6 +2,7 @@
 import { GameRepository } from "./infrastructure/mongoose/repositories/GameRepository.js";
 import { UserRepository } from "./infrastructure/mongoose/repositories/UserRepository.js";
 import { CompanyRepository } from "./infrastructure/mongoose/repositories/CompanyRepository.js";
+import { EmulationRepository } from "./infrastructure/mongoose/repositories/EmulationRepository.js";
 import { PurchaseRepository } from "./infrastructure/mongoose/repositories/PurchaseRepository.js";
 import { ReviewRepository } from "./infrastructure/mongoose/repositories/ReviewRepository.js";
 
