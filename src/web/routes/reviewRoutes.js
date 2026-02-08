@@ -4,7 +4,7 @@ import { validate } from "../middlewares/validate.js";
 import { createReviewSchema, updateReviewSchema } from "../schemas/reviewSchema.js";
 import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 
-export const gameRouter = (controller) => {
+export const reviewRouter = (controller) => {
     const router = Router();
     
     // Public routes
