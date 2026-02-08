@@ -14,7 +14,7 @@ export class ReviewRepository {
         return await this.model.find({}).lean();
     }
 
-    async getById() {
+    async getById(id) {
         const review = await this.model.findById(id).lean();
         if (!review) {
             throw new Error("Review not found");
