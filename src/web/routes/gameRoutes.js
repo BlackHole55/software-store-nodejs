@@ -12,6 +12,7 @@ export const gameRouter = (controller) => {
 
     // PRIVATE STATIC
     router.get('/my-library', authMiddleware, controller.handleGetUserLibraryWithDetails);
+    router.get('/my-uploads', authMiddleware, controller.handleGetByUserId);
     router.get('/admin', authMiddleware, roleMiddleware("admin"), controller.handleGetAll);
 
     // PUBLIC
