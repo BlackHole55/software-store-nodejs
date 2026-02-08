@@ -23,10 +23,10 @@ export class GetUserLibraryWithDetailsUseCase {
             const game = gameMap.get(gameIdStr);
 
             return {
-                gameId: gameIdStr,
+                game_id: gameIdStr,
                 title: game ? game.title : "Unkown Game",
-                addedAt: item.addedAt,
-                playtimeHours: item.playtimeHours
+                added_at: item.added_at,
+                playtime_hours: item.playtime_hours
             };
         });
     }
