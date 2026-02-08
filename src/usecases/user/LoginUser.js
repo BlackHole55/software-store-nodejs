@@ -23,6 +23,6 @@ export class LoginUserUseCase {
             role: user.role
         });
 
-        return { token };
+        return { token: token, userID: user.id, role: user.role };
     }
 }
