@@ -15,8 +15,11 @@ npm run dev
 ### Technology stack
 
 **Frontend**: Next.js (React)
+
 **Backend**: NodeJs (Express)
+
 **Database**: MongoDB
+
 **Other**: REST API
 
 ### API Documentaion
@@ -31,6 +34,8 @@ POST /auth/login - Authenticates credentials and returns a session or token. Thi
 GET /games - Returns a collection of all verified game listings. This endpoint is the primary data source for the frontend "Store" page.
 
 GET /games/:id - Provides comprehensive details for a specific game, including embedded publisher, developer, and emulation information.
+
+GET /games/search: - Provides search among verified games
 
 GET /companies - Retrieves a list of all companies (Publishers and Developers) registered on the platform.
 
